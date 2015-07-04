@@ -166,6 +166,119 @@ initVal(getContextPath()+"/Ajax/homeajax.jsp?i=batchCnt",".count4");
 		</div>
 	</div>
 	
+	 <div class="row">
+                  <div class="col-lg-8">
+                      <!--custom chart start-->
+                      <div class="border-head">
+                          <h3>Earning Graph</h3>
+                      </div>
+                      <div class="custom-bar-chart">
+                          <ul class="y-axis">
+                              <li><span>100</span></li>
+                              <li><span>80</span></li>
+                              <li><span>60</span></li>
+                              <li><span>40</span></li>
+                              <li><span>20</span></li>
+                              <li><span>0</span></li>
+                          </ul>
+                          <div class="bar">
+                              <div class="title">APR</div>
+                              <div class="value tooltips" data-original-title="80%" data-toggle="tooltip" data-placement="top">86%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">MAY</div>
+                              <div class="value tooltips" data-original-title="50%" data-toggle="tooltip" data-placement="top">45%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">JUN</div>
+                              <div class="value tooltips" data-original-title="40%" data-toggle="tooltip" data-placement="top">40%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">JUL</div>
+                              <div class="value tooltips" data-original-title="55%" data-toggle="tooltip" data-placement="top">55%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">AUG</div>
+                              <div class="value tooltips" data-original-title="20%" data-toggle="tooltip" data-placement="top">20%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">SEP</div>
+                              <div class="value tooltips" data-original-title="39%" data-toggle="tooltip" data-placement="top">39%</div>
+                          </div>
+                          <div class="bar">
+                              <div class="title">OCT</div>
+                              <div class="value tooltips" data-original-title="75%" data-toggle="tooltip" data-placement="top">75%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">NOV</div>
+                              <div class="value tooltips" data-original-title="45%" data-toggle="tooltip" data-placement="top">45%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">DEC</div>
+                              <div class="value tooltips" data-original-title="50%" data-toggle="tooltip" data-placement="top">50%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">JAN</div>
+                              <div class="value tooltips" data-original-title="42%" data-toggle="tooltip" data-placement="top">42%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">FEB</div>
+                              <div class="value tooltips" data-original-title="60%" data-toggle="tooltip" data-placement="top">60%</div>
+                          </div>
+                          <div class="bar ">
+                              <div class="title">MAR</div>
+                              <div class="value tooltips" data-original-title="90%" data-toggle="tooltip" data-placement="top">90%</div>
+                          </div>                         
+                      </div>                      
+                      <!--custom chart end-->
+                  </div>
+                  <div class="col-lg-4">
+                      <!--new earning start-->
+                      <div class="panel terques-chart">
+                          <div class="panel-body chart-texture">
+                              <div class="chart">
+                                  <div class="heading">
+                                      <span>Saturday</span>
+                                      <strong><i class="fa fa-inr"></i> 57,00 | 15%</strong>
+                                  </div>
+                                  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]"></div>
+                              </div>
+                          </div>
+                          <div class="chart-tittle">
+                              <span class="title">New Earning</span>
+                              <span class="value">
+                                  <a href="#" class="active">Market</a>
+                                  |
+                                  <a href="#">Referal</a>
+                                  |
+                                  <a href="#">Online</a>
+                              </span>
+                          </div>
+                      </div>
+                      <!--new earning end-->
+
+                      <!--total earning start-->
+                      <div class="panel green-chart">
+                          <div class="panel-body">
+                              <div class="chart">
+                                  <div class="heading">
+                                      <span>July</span>
+                                      <strong>4 Days | 65%</strong>
+                                  </div>
+                                  <div id="barchart"></div>
+                              </div>
+                          </div>
+                          <div class="chart-tittle">
+                              <span class="title">Total Earning</span>
+                              <span class="value"><i class="fa fa-inr"></i>, 76,54,678</span>
+                          </div>
+                      </div>
+                      <!--total earning end-->
+                  </div>
+              </div>
+	
+	
+	
 		<div class="row">
 			<div class="col-lg-12">
 				<section class="panel">
@@ -222,7 +335,7 @@ initVal(getContextPath()+"/Ajax/homeajax.jsp?i=batchCnt",".count4");
 									
 									<td><a class="btn btn-info btn-xs"
 										href="../TIMS/Enquiry/details.jsp?id=<%=id%>"><i
-											class="icon-wrench"></i> More...</a></td>
+											class="fa fa-wrench"></i> More...</a></td>
 								</tr>
 								<%
 									}										
@@ -264,7 +377,6 @@ initVal(getContextPath()+"/Ajax/homeajax.jsp?i=batchCnt",".count4");
 										Connection dbc = DbConnection.getConnection(); */
 										s = con.createStatement();
 										sql = "SELECT `enquiry`.`id`,`enquiry`.`source`,`enquiry`.`name`,`enquiry`.`email`,`enquiry`.`courseinterested`,`enquiry`.`status`, `enquiry_data`.`donebyempid`, `enquiry_data`.`followon`,`enquiry_data`.`message` FROM enquiry, enquiry_data WHERE ( `enquiry_data`.`enquiry_id`=`enquiry`.`id`) AND ( `enquiry_data`.`followon`=CURDATE()) AND ( `enquiry`.`status`!='COMPLETED') AND ( `enquiry`.`status`!='NOT INTERESTED') AND ( `enquiry`.`status` LIKE 'FOLLOWUP') AND (`enquiry_data`.`donebyempid` IS NULL) ORDER BY `enquiry`.`id` DESC";
-										
 										rs = null;										
 										rs = s.executeQuery(sql);										
 										/* ResultSet rrrs; */
@@ -315,38 +427,40 @@ initVal(getContextPath()+"/Ajax/homeajax.jsp?i=batchCnt",".count4");
 		</div>
 	
 	
-			
-		<div class="row">
+	<div class="row">
 			<div class="col-lg-12">
 				<section class="panel">
 					<header class="panel-heading summary-head">
 						<h4>Batches for Today</h4>
-						<span><%=td%></span>
+						<span><%=td%></span>						
 					</header>
-					<div class="adv-table">					
-                        <table class="table table-striped m-b-none text-small datatable" id="sample_1">						
+			 		<div class="adv-table">
+            <!--            <table class="table table-striped m-b-none text-small datatable" id="sample_1" > -->
+			<!-- 		<div class="table-responsive"> -->
+						<table class="table table-striped m-b-none text-small datatable dtable" id="sample_1">
 							<thead>
-								<tr>
+								<tr class="odd">
 									<th>Batch Id</th>
 									<th>Date</th>
 									<th>Session</th>
 									<th>Trainer</th>
 									<th>Session Status</th>
 									<th>More...</th>
+									<!-- <th width="10%">Source</th>
+									<th width="15%">Name</th>
+									<th width="15%">Course Interested</th>
+									<th width="10%">Status</th>
+									<th width="10%">Message</th>									
+									<th width="10%">Done</th>
+									<th width="10%">Work</th> -->
 								</tr>
 							</thead>
 							<tbody>
 								<%
-							/* 		SimpleDateFormat ddmm = new SimpleDateFormat("yyyy-MM-dd");
-										Date today33 = new Date();
-										String todayd = ddmm.format(today33); */
-
 										String userid = request.getAttribute("userid").toString();
 										st = con.createStatement();
 										//Get Batches Today
-										sqlq = "SELECT `batchsession`.`id`,`batchdetails`.`session`,`batchdetails`.`TrainerId`,`batchsession`.`batchid`,`batchsession`.`status` FROM batchsession,batchdetails where (`batchsession`.`date` = '"
-												+ todayd
-												+ "') AND (`batchsession`.`batchid`=`batchdetails`.`id`)";
+										sqlq = "SELECT `batchsession`.`id`,`batchdetails`.`session`,`batchdetails`.`TrainerId`,`batchsession`.`batchid`,`batchsession`.`status` FROM batchsession,batchdetails where (`batchsession`.`date` = CURDATE()) AND (`batchsession`.`batchid`=`batchdetails`.`id`)";
 										rs = st.executeQuery(sqlq);
 										while (rs.next()) {
 											int bid = rs.getInt("batchid");
@@ -363,9 +477,7 @@ initVal(getContextPath()+"/Ajax/homeajax.jsp?i=batchCnt",".count4");
 									</td>
 								</tr>
 								<%
-									}
-									//Close DbConnection
-									DbConnection.close();
+									}									
 								%>
 							</tbody>
 						</table>
@@ -376,5 +488,16 @@ initVal(getContextPath()+"/Ajax/homeajax.jsp?i=batchCnt",".count4");
 	</section>
 </section>
 <!--main content end-->
+
+<script>
+$(function(){
+    $('select.styled').customSelect();
+});
+</script>
+
+<%
+	//Close DbConnection
+	DbConnection.close();	
+%>
 
 <%@include file="Common/Footer.jsp"%>
