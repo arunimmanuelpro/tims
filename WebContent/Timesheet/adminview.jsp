@@ -113,7 +113,7 @@
 										<td><%=comment%></td>
 
 										<td><a
-											href="viewandedit.jsp?empid=<%=rs.getInt("id") %>&fromdate=<%=rs5.getString("fromdate")%>&todate=<%=rs5.getString("todate")%>">View
+											href="viewandedit.jsp?empid=<%=rs.getInt("id") %>&fromdate=<%=rs5.getString("fromdate")%>&todate=<%=rs5.getString("todate")%>" target = "blank">View
 												and Edit</a></td>
 
 									</tr>

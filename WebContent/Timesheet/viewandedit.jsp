@@ -44,6 +44,7 @@
                                     		
 						<header class="panel-heading summary-head">
 						<%Connection con = DbConnection.getConnection();
+						
 						PreparedStatement ps2 = con.prepareStatement("select FirstName,LastName from employee where id =?");
 						ps2.setInt(1, Integer.parseInt(request.getParameter("empid")));
 						ResultSet rs3 = ps2.executeQuery();
