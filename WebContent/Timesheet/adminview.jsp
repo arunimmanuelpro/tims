@@ -35,7 +35,7 @@
 									<tr>
 
 										<th style="text-align: center;">Employee Name</th>
-										<th style="text-align: center;">Date</th>
+										<th style="text-align: center;">From Date to To Date</th>
 
 										<th style="text-align: center;">Comment</th>
 
