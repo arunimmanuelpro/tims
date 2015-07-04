@@ -20,16 +20,20 @@
     <script src ="<%=request.getContextPath()%>/js/bootbox.min.js"></script>
     <script src="<%=request.getContextPath()%>/js/advanced-form-components.js"></script>   
 	<script src="<%=request.getContextPath()%>/js/jquery.sparkline.js" type="text/javascript"></script>
-    <script src="<%=request.getContextPath()%>/js/owl.carousel.js" ></script>     
+	<script src="<%=request.getContextPath()%>/js/owl.carousel.js" ></script>     
 	<script src="<%=request.getContextPath()%>/js/bootstrap-switch.js"></script>	
 	<script src="<%=request.getContextPath()%>/js/jquery.validate.password.js"></script>
 	<script src="<%=request.getContextPath()%>/js/count.js"></script>	
 	<script src="<%=request.getContextPath()%>/js/dynamic_table_init.js"></script>
+	<script src="<%=request.getContextPath()%>/js/sparkline-chart.js"></script>
+    <script src="<%=request.getContextPath()%>/js/easy-pie-chart.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery.customSelect.min.js" ></script>
+	
    
 	<script src="<%=request.getContextPath()%>/assets/gritter/js/jquery.gritter.js" type="text/javascript"></script>	
 	<script	src="<%=request.getContextPath()%>/assets/jquery-knob/js/jquery.knob.js" type="text/javascript"></script> 
     <script src="<%=request.getContextPath()%>/assets/advanced-datatable/media/js/jquery.dataTables.js" type="text/javascript"></script>
-   
+	<script src="<%=request.getContextPath()%>/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
    	
 
 <%@include file="footerinclude.jsp"%>
