@@ -1,0 +1,37 @@
+                  <div class="col-lg-4">
+                      <!--widget start-->
+                      <aside class="profile-nav alt green-border">
+                          <section class="panel">
+                              <div class="user-heading alt green-bg">
+                                  <a href="#">
+                                      <img alt="" src="<%=request.getContextPath() %>/GetPicture.jsp">
+                                  </a>
+                                  <h1><%=eName %></h1>
+                                  <p><%=(GetInfoAbout.getjobtitlename(rs1.getString("JobTitleId"))==null?"":GetInfoAbout.getjobtitlename(rs1.getString("JobTitleId"))) %></p>
+                              </div>
+
+                              <ul class="nav nav-pills nav-stacked">
+                              	  <li class="active"><a href="<%=request.getContextPath()%>/Timesheet/empTimeSheet.jsp"> <i class="fa fa-user"></i> Admin Timesheet <span class="label label-primary pull-right r-activity" id="categorycnt"></span></a></li>
+                                  <li><a href="javascript:;"> <i class="fa fa-calendar"></i> Create Timesheet <span class="label label-primary pull-right r-activity">19</span></a></li>
+                                  <li><a href="javascript:;"> <i class="fa fa-clock-o"></i> Current Sheet <span class="label label-info pull-right r-activity">11</span></a></li>
+                                  <li><a href="javascript:;"> <i class="fa fa-bell-o"></i> View Sheet <span class="label label-warning pull-right r-activity">03</span></a></li>
+                                  <li><a href="javascript:;"> <i class="fa fa-envelope-o"></i> Status <span class="label label-success pull-right r-activity">10</span></a></li>
+                              </ul>
+                     	   </section>
+                  	  </aside>
+                  	  <!--widget end-->
+                   	  <!--widget start-->
+                      <div class="panel">
+                          <div class="panel-body">
+                              <div class="bio-chart">
+                                  <input class="knob" data-width="101" data-height="101" data-displayPrevious=true  data-thickness=".2" value="80" data-fgColor="#4CC5CD" data-bgColor="#e8e8e8">
+                              </div>
+                              <div class="bio-desk">
+                                  <h4 class="terques">Timesheet Completion </h4>
+                                  <p>Month: <%=cntMonth %>&nbsp;<%=cntYear %></p>
+                                  <p>Start: <%=fromdate %></p>
+                                  <p>End: <%=enddate %></p>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
