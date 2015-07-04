@@ -11,7 +11,7 @@
     <title><%=request.getAttribute("title")%> - TIMS Brain</title>
     
     <!-- Bootstrap core CSS -->
-       
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/img/favicon.png">   
     <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet">	
 	<link href="<%=request.getContextPath()%>/css/bootstrap-reset.css" 	rel="stylesheet">
 	
@@ -24,6 +24,7 @@
     <!--external css-->
     <link href="<%=request.getContextPath()%>/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="<%=request.getContextPath()%>/assets/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <link href="<%=request.getContextPath()%>/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
         
     <!--  right slidebar -->
     <link href="<%=request.getContextPath()%>/css/slidebars.css" rel="stylesheet">
@@ -223,10 +224,11 @@
 						<i class="fa fa-sitemap"></i><span>Students</span><span class="arrow"></span>
 					</a>
 						<ul class="sub">
-							<li><a class="" href="comingsoon.jsp">Pursuing</a></li>						
-							<li><a class="" href="comingsoon.jsp">Alumni</a></li>
-							<li><a class="" href="<%=request.getContextPath()%>/student/">View All</a></li>
-					</ul></li>
+							<li><a class="" href="<%=request.getContextPath()%>/student/">Pursuing</a></li>						
+							<li><a class="" href="<%=request.getContextPath()%>/student/comingsoon.jsp">Alumni</a></li>
+							<li><a class="" href="<%=request.getContextPath()%>/student/comingsoon.jsp">View All</a></li>
+						</ul>
+					</li>					
 				<%	}  %>
 						<li class="sub-menu">
 							<a href="javascript:;" class=""> 
