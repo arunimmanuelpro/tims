@@ -8,6 +8,7 @@ public class DbConnection {
 
 	private static Connection conn;
 
+
 	public static Connection getConnection() throws Exception {		
 		
 		String url = "jdbc:mysql://localhost:3306/tims";
