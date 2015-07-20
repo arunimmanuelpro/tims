@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DbConnection {
 
 	private static Connection conn;
-
+	public static String [] monthname = {"Jan","Feb","March","April","May","June","July","August","Sept","Oct","Nov","Dec"};
 
 	public static Connection getConnection() throws Exception {		
 		
