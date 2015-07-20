@@ -31,6 +31,7 @@ return;
 									<%} %>
 									</select>
 							</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>Month</td>
@@ -39,22 +40,85 @@ return;
 								
 								</select>
 							</td>
+							<td><input type= "button" value = "Generate Payslip" onclick = "getPayroll();" class = "btn btn-primary"/></td>
 						</tr>
 					</table>
+					
 					</section>
 					</section>
 					</div>
-					</div>
-					</section>
-					</section>
-<script>
+					<div class="col-sm-12">
+				<!--  One Management Topic Start -->
+				<div class="inbox-head">
+					<h3>
+						<i class="icon-folder-open"> Employee Payroll</i>
+					</h3>
+					
+				</div>
+				<section class="panel" id = "paysliptable">
+				
+				</section>
+				<!--  One Management Topic End -->
+			</div>
+		</div>
+					
+				</section>
+				</section>	
+				<script>
+					function getPayroll(){
+						var year = parseInt(document.getElementById("year").value);
+						
+					var month = document.getElementById("month").value;
+					
+					if((year!=0) && (month!="")){
+						var xmlhttp;
+						xmlhttp = new XMLHttpRequest();
+						xmlhttp.onreadystatechange = function(){
+							if(xmlhttp.readyState==4&&xmlhttp.status==200){
+								var response = xmlhttp.responseText.trim();
+								document.getElementById("paysliptable").innerHTML = response;
+							}
+						}
+						xmlhttp.open("GET","<%=request.getContextPath()%>/Ajax/calculatepayslip.jsp?year="+year+"&month="+month,true);
+						xmlhttp.send();
+					}else{
+						alert("Kindly Select Year and Month");
+						
+					}
+					
+					}
+				
+				</script>
+					
+					
+					
+					<script>
 	function getMonth(year){
+		var x = document.getElementById("month");
+		x.remove(x.selectedIndex);
 		if(year!=0){
 			var xmlhttp;
 			xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function(){
 				if(xmlhttp.readyState==4&&xmlhttp.status==200){
-					alert(xmlhttp.responseText);
+					var response = xmlhttp.responseText.trim();
+					if(response!="[]"){
+					response = response.replace("[","");
+					
+					response = response.replace("]","");
+					var entry = response.split(",");
+					
+				   var month = new Array("Jan","Feb","March","April","May","June","July","August","Sept","Oct","Nov","Dec");
+					for(var i = 0; i<entry.length;i++){
+					
+						 var option = document.createElement("option");
+						   
+						    option.value=entry[i];
+						    option.text = month[entry[i]-1];
+						    x.add(option);
+						
+						}
+					}
 				}
 			}
 			xmlhttp.open("GET","<%=request.getContextPath()%>/Ajax/getyear.jsp?year="+year,true);

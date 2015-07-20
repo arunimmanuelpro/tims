@@ -15,5 +15,7 @@ ResultSet rs = ps.executeQuery();
 while(rs.next()){
 	month.add(rs.getInt("month"));
 }
+
+out.println(month);
 con.close();
 %>

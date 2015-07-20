@@ -100,7 +100,7 @@
 				    	alert("error");
 				    	return false;
 				    }
-				    $("#payroll_info_ajax_display").load("<%=request.getContextPath() %>/Payroll/AjaxGetPayroll.jsp?pr=" + str, function( response, status, xhr ) {
+				    $("#payroll_info_ajax_display").load("<%=request.getContextPath() %>/Payroll/Ajax/GetPayroll.jsp?pr=" + str, function( response, status, xhr ) {
 						  if(status="success"){
 							  $("#payroll_info_ajax_display").html(response);
 						  }
