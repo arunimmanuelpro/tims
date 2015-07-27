@@ -210,10 +210,12 @@ if(rs1.next()){
 								<span>
 									<span>Payment Status</span>:
 									<%
-										if(bal==0){
+										if(bal==0 && (totalfees!=0)){
 																		out.print("<b class='text-success'>Payment Cleared</b>");
 																	}else if(bal>0){
 																		out.print("<b class='text-warning'>Payment Pending</b>");
+																	}else if(totalfees==0 && bal==0){
+																		out.print("<b class='text-success'>Fees not discussed</b>");
 																	}
 									%>
 								</span>

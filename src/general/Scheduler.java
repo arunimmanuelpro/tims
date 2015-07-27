@@ -13,6 +13,7 @@ import java.util.TimerTask;
 import access.DbConnection;
 import mailing.ReadJustDial;
 import mailing.ReadSulekha;
+import mailing.ReadSulekha2;
 import mailing.ReadSulekhaOld;
 import mailing.ReadYet5;
 
@@ -23,10 +24,10 @@ public class Scheduler implements Runnable {
 	public static void start() throws Exception {
 
 		if (timer == null) {
-			timer = new Timer("MyTimer1");// create a new Timer
+			//timer = new Timer("MyTimer1");// create a new Timer
 			// Schedules every 1 minutes
 			// General Timer
-			System.out.println("Timer 1 Created");
+		//	System.out.println("Timer 1 Created");
 			//timer.scheduleAtFixedRate(timerTask1, new Date(), 60000*5);
 		}
 		
@@ -35,7 +36,7 @@ public class Scheduler implements Runnable {
 			// Schedules every 2 Seconds
 			// Mail Read Timer
 			System.out.println("Timer 2 Created");
-			//timer2.scheduleAtFixedRate(timerTask2, new Date(), 5000);
+			timer2.scheduleAtFixedRate(timerTask2, new Date(), 5000);
 		}
 	}
 
@@ -58,9 +59,10 @@ public class Scheduler implements Runnable {
 		@Override
 		public void run() {
 			try {
-				//new ReadSulekha().readMails();				
-				//ReadJustDial jus = new ReadJustDial();
-				//jus.readMails();				
+				new ReadSulekha().readMails();	
+				new ReadSulekha2().readMails();	
+				ReadJustDial jus = new ReadJustDial();
+				jus.readMails();				
 				//ReadYet5 yet = new ReadYet5();
 				//yet.readMails();
 			} catch (Exception e) {

@@ -213,9 +213,11 @@
 							<i class="fa fa-gears"></i><span>Enquiry</span> <span class="arrow"></span>
 						</a>
 						<ul class="sub">							
-							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">New Enquiry</a></li>
-							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">Pending</a></li>
-							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?completed">Completed</a></li>							
+							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">Mail Enquiry</a></li>
+							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/newenquiry.jsp">New Enquiry</a></li>
+							
+							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">Follow Up</a></li>
+							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?completed">Closed</a></li>							
 						</ul>
 					</li>	
 					<%  } %>		

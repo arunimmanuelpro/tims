@@ -28,16 +28,16 @@ import javax.mail.search.FlagTerm;
 
 import access.DbConnection;
 
-public class ReadSulekha {
+public class ReadSulekha2 {
 	Properties properties = null;
 	private Session session = null;
 	private Store store = null;
 	private Folder inbox = null;
 	boolean gotdata = false;
-	private String userName = "sulekha@eyeopentechnologies.com";// provide user name
+	private String userName = "sulekha2@eyeopentechnologies.com";// provide user name
 	private String password = "WinWin1940";// provide password
 
-	public ReadSulekha() {
+	public ReadSulekha2() {
 	}
 
 	public void readMails() throws IOException, Exception {
@@ -59,7 +59,7 @@ public class ReadSulekha {
 			inbox = store.getFolder("INBOX");
 			inbox.open(Folder.READ_WRITE);
 			Message messages[] = inbox.search(new FlagTerm(new Flags(Flag.SEEN), false));
-			System.out.println("Sulekha Mail Count : "+messages.length);
+			System.out.println("Sulekha2 Mail Count : "+messages.length);
 			for (int i = 0; i < messages.length; i++) {
 				Message message = messages[i];
 				Address[] from = message.getFrom();
@@ -73,7 +73,7 @@ public class ReadSulekha {
 				boolean already_read = false;
 
 				Statement sd = con.createStatement();
-				String checksql = "SELECT * FROM `enquiry` WHERE `source`='SULEKHA' AND `mailid`='"	+ msgno + "'";
+				String checksql = "SELECT * FROM `enquiry` WHERE `source`='SULEKHA2' AND `mailid`='"	+ msgno + "'";
 				ResultSet rs2 = sd.executeQuery(checksql);
 				if (rs2.next()) {
 					already_read = true;
@@ -81,7 +81,7 @@ public class ReadSulekha {
 				if (!already_read) {
 					String email = from == null ? null : ((InternetAddress) from[0]).getAddress();
 					if (email.equalsIgnoreCase("enq@ypleads.sulekha.com")) {
-						System.out.println("Sulekha Mail :" + email);
+						System.out.println("Sulekha2 Mail :" + email);
 					} else {
 						System.out.println("Mail Ignored :" + email);
 						ignore = true;
@@ -193,7 +193,7 @@ public class ReadSulekha {
 						String year = yyyy.format(currentdate);						
 						Statement s = con.createStatement();
 						String mobilen = details4.get(4);
-						String sql = "INSERT INTO `enquiry`(`source`, `name`, `email`, `mobile`, `qualification`, `stream`, `currentlyin`, `homephone`, `courseinterested`, `address`,`donebyid`,`date`,`month`,`year`,`status`,`mailid`) VALUES ('SULEKHA','"
+						String sql = "INSERT INTO `enquiry`(`source`, `name`, `email`, `mobile`, `qualification`, `stream`, `currentlyin`, `homephone`, `courseinterested`, `address`,`donebyid`,`date`,`month`,`year`,`status`,`mailid`) VALUES ('SULEKHA2','"
 								+ details4.get(0)
 								+ "','"
 								+ details4.get(3)
@@ -223,7 +223,7 @@ public class ReadSulekha {
 							String cDatet = ddm.format(cdd);
 							for (String tuser : users) {
 								int userid = Integer.parseInt(tuser);
-								sql = "INSERT INTO `notifications`(`msg`, `read` , `userid`,`ReceivedAt`) VALUES ('NEW ENQUIRY from SULEKHA :"
+								sql = "INSERT INTO `notifications`(`msg`, `read` , `userid`,`ReceivedAt`) VALUES ('NEW ENQUIRY from SULEKHA2 :"
 										+ details4.get(0)
 										+ "',0,'"
 										+ userid
@@ -235,14 +235,14 @@ public class ReadSulekha {
 							// Actual End
 						}
 						if (gotsulekha) {					
-							System.out.println("1 SULEKHA Mail Details Read Successfully");
+							System.out.println("1 SULEKHA2 Mail Details Read Successfully");
 							try {
 								message.setFlag(Flags.Flag.SEEN, true);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
 						} else {
-							System.out.println("SULEKHA Mail Details Read Failed");					
+							System.out.println("SULEKHA2 Mail Details Read Failed");					
 							message.setFlag(Flag.SEEN, false);
 						}
 					}catch (Exception e) {

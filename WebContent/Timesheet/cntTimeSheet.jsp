@@ -484,11 +484,12 @@
 	<%}else{ %>
 	var count =1;
 	<% } %>
-	
+	cnsole.log("Count : "+count);
 	var element10;
 	var id;
 	var c=count;
 	function checkInput(ob) {	 
+	
 	  var invalidChars = /[^0-9]/gi;
 	  if(invalidChars.test(ob.
 		value)) {
@@ -507,15 +508,22 @@
 			}
 			if (count != 1) {
 				for (var i = 1; i < count; i++) {
+					
 					var temp = "category" + i;
+					try{
 					sel = document.getElementById(temp).value;
+				}catch(err){
+					console.log(err);
+				}
 					if (sel < 1) {
 						alert("Select Category First");
 						ob.value = "";
 
 					}
+					
 				}
 			}
+			
 		}
 		function Totalhrsperday() {
 			var els_mon = [ 'mon' ];
@@ -854,7 +862,7 @@
   		  		var param = "";
   		  		
   		  		
-    			param = "from=<%= fromdate%>&todate=<%= enddate%>&count="+count;
+  		  	param = "from=<%= fromdate%>&todate=<%= enddate%>&count="+count;
     		  
     		  	param += "&1cat="+document.getElementById('category').value;
     		  	param += "&1r1="+document.getElementById('mon').value;

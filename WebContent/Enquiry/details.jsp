@@ -16,7 +16,7 @@
 	}
 	
 
-	String source = "", name = "", email = "", mobile = "", qua = "", des = "", curr = "", home = "", ci = "", address = "", gender = "", status = "";
+	String source = "", name = "", email = "", mobile = "", qua = "", des = "", curr = "", home = "", ci = "", address = "", gender = "", status = "",stype="";
 	boolean valid = false;
 
 	if (id == 0) {
@@ -39,6 +39,7 @@
 	ci = rs.getString("courseinterested");
 	address = rs.getString("address");
 	status = rs.getString("status");
+	stype = rs.getString("stype");
 	valid = true;
 		} else {
 	//enquiry not found
@@ -96,11 +97,28 @@
 							</header>
 							<div class="panel-body">
 								<form class="form-horizontal" id="newemp" name="newemp">
+								
+								<div  class="form-group" align = "center">
+								
+												<input type= "radio"  name = "type" value ="Student" id = "type" <%if((!stype.isEmpty()&&stype!=null)&&stype.contains("Student")){out.println("checked");} %>/>  Student
+												<input type= "radio"  name = "type" value ="Professional" id = "type" <%if((!stype.isEmpty()&&stype!=null)&&stype.contains("Professional")){out.println("checked");} %>/>  Professional
+												<input type= "radio"  name = "type" value ="Project" id = "type" <%if((!stype.isEmpty()&&stype!=null)&&stype.contains("Project")){out.println("checked");} %>/>  Project
+												</div>
+								
+								
 									<div class="form-group">
 										<label class="col-lg-3 control-label">Name</label>
 										<div class="col-lg-8">
 											<input type="text" name="name" id="name" value="<%=name%>"
 												data-required="true" class="form-control parsley-validated">
+										</div>
+									</div>
+										<div class="form-group">
+										<label class="col-lg-3 control-label">Mobile</label>
+										<div class="col-lg-8">
+											<input type="text" name="mobile" value="<%=mobile%>" id="mobile"
+												data-type="phone" data-required="true"
+												class="form-control parsley-validated">
 										</div>
 									</div>
 									<div class="form-group">
@@ -155,6 +173,24 @@
 
 										</div>
 									</div>
+									
+									<div class="form-group">
+												<label class="col-lg-3 control-label">Course
+													Interested</label>
+												<div class="col-lg-8">
+												<select name = "courseinterestedin"  id = "courseinterestedin" class = "form-control">
+													<option value = "Code Java" >Core Java</option>
+													<option value=  "Android" >Android</option>
+													<option value=  "Other">Other</option>
+												
+												</select>
+												<div id = "other" style = "display:none;">
+												<input type = "text" name= "courseinterestedino" class = "form-control"/>
+												</div>
+												</div>
+											</div>
+									
+									
 									<input type="hidden" name="id" value="<%=id%>">
 									<div class="form-group">
 										<div class="col-lg-9 col-lg-offset-3">
@@ -172,6 +208,16 @@
 								$(document)
 										.ready(
 												function() {
+													$("#courseinterestedin").change(function(){
+
+														if($("#courseinterestedin").val()=="Other"){
+															$("#other").show();
+														}else{
+															$("#other").hide();
+														}
+													});
+													
+													
 													$("#newemp")
 															.submit(
 																	function() {
@@ -241,10 +287,15 @@
 									href="../Ajax/enquiryoperations.jsp?bid=<%=id%>&operation=COMPLETED"
 									class="btn btn-info">COMPLETED</a> <a
 									href="ProcessStudent.jsp?id=<%=id%>"
-									class="btn btn-success">SWITCH TO STUDENT</a> <a
+									class="btn btn-success">SWITCH TO STUDENT</a> 
+									<%
+									if(!status.contains("DUPLICATE")){ %>
+									<a
 									href="../Ajax/enquiryoperations.jsp?bid=<%=id%>&operation=DUPLICATE"
 									class="btn btn-warning">DUPLICATE ENQUIRY</a>
-									<%} %>
+									
+									<%
+									}} %>
 							</div>
 						</section>
 					</div>
@@ -270,15 +321,18 @@
 														sqlq = "SELECT * FROM enquiry_data where `followon` = '" + todayd
 																+ "' AND `enquiry_id` = '" + id
 																+ "' ORDER BY id DESC LIMIT 1";
+														System.out.println(sqlq);
 														rss = st.executeQuery(sqlq);
 														if (rss.next()) {
 															String callin = rss.getString("callin");
 															String callout = rss.getString("callout");
 															String emp_id = rss.getString("donebyempid");
 															
-															if (callout == null || callout.isEmpty()) {
+															if (callout == null || callout.isEmpty()||callin.equals("00:00:00")) {
+																
 																if (status.equalsIgnoreCase("NEW")
 																		|| status.equalsIgnoreCase("FOLLOWUP")) {
+																	
 								%>
 								<a
 									href="<%=request.getContextPath()%>/Ajax/enquirycall.jsp?id=<%=id%>"
@@ -297,8 +351,10 @@
 															} else {
 																out.println("<h2>Call for today is Complete</h2>");
 															}
-														}
+														}else{
 								%>
+								
+								<%} %>
 							</div>
 							<script type="text/javascript">
 								// we will add our javascript code here           

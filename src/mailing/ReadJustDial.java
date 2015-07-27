@@ -80,9 +80,10 @@ public class ReadJustDial {
 			store.connect();
 			inbox = store.getFolder("INBOX");
 			inbox.open(Folder.READ_WRITE);
+			
 			Message messages[] = inbox.search(new FlagTerm(
 					new Flags(Flag.SEEN), false));
-			System.out.println("J" + messages.length);
+			System.out.println("Just Dail Mail Count : "+messages.length);
 			for (int i = 0; i < messages.length; i++) {
 				Message message = messages[i];
 				Address[] from = message.getFrom();
@@ -316,6 +317,7 @@ public class ReadJustDial {
 				con.close();
 			}
 		}
+		store.close();
 	}
 
 	public StringBuilder procesMultiPart(Multipart content) {

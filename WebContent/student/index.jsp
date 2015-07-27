@@ -3,9 +3,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="access.DbConnection"%>
 <%@page import="java.sql.Connection"%>
-<%
-	request.setAttribute("title", "All Students");
-%>
+
 
 <%@include file="../Common/Header.jsp"%>
 <%
@@ -22,7 +20,7 @@
 	String sql = "";
 
 	//Get student
-	sql = "SELECT * FROM `students` order by id";
+	sql = "SELECT * FROM `students` order by id DESC	";
 	s = con.createStatement();
 	ResultSet studetails = s.executeQuery(sql);
 	String stuid = request.getAttribute("userid").toString();
@@ -78,7 +76,7 @@
 								<td><%=(studetails.getString("status")==null?"":studetails.getString("status"))%>
 								<td><a class="btn btn-info btn-xs"
 									href="profile.jsp?id=<%=studetails.getString(1)%>"> <i
-										class="icon-archive"> </i>
+										class="icon-archive">View </i>
 								</a></td>
 							</tr>
 							<%

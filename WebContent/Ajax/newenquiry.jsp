@@ -18,8 +18,14 @@
 	String currentlyin = request.getParameter("currentlyin");
 	String homephone = request.getParameter("homephone");
 	String status = request.getParameter("status");
+	String type = request.getParameter("type");
+	String telecaller = request.getParameter("telecaller");
+	String counsiller = request.getParameter("counsiller");
 	String courseinterestedin = request
 			.getParameter("courseinterestedin");
+	if(courseinterestedin.equals("Other")){
+		courseinterestedin = request.getParameter("courseinterestedino");
+	}
 	String address = request.getParameter("address");
 	String notes = request.getParameter("notes");
 	String followondate = request.getParameter("date");
@@ -48,7 +54,8 @@
 
 			Connection con = DbConnection.getConnection();
 			Statement s = con.createStatement();
-			String sql = "INSERT INTO `enquiry`(`source`, `name`, `email`, `mobile`, `qualification`, `stream`, `currentlyin`, `homephone`, `courseinterested`, `address`,`donebyid`,`date`,`month`,`year`,`status`) VALUES ('"	+ source+ "','"	+ name	+ "','"	+ email	+ "','"	+ mobile+ "','"	+ qualification	+ "','"	+ designation+ "','"+ currentlyin+ "','"+ homephone	+ "','"	+ courseinterestedin+ "','"	+ address	+ "','"	+userid+ "','"	+ cDate	+ "','"	+ month+ "','"	+ year + "','"+status+"')";
+			String sql = "INSERT INTO `enquiry`(`source`, `name`, `email`, `mobile`, `qualification`, `stream`, `currentlyin`, `homephone`, `courseinterested`, `address`,`donebyid`,`date`,`month`,`year`,`status`,`stype`,`telecaller`,`counsiller`) VALUES ('"	+ source+ "','"	+ name	+ "','"	+ email	+ "','"	+ mobile+ "','"	+ qualification	+ "','"	+ designation+ "','"+ currentlyin+ "','"+ homephone	+ "','"	+ courseinterestedin+ "','"	+ address	+ "','"	+userid+ "','"	+ cDate	+ "','"	+ month+ "','"	+ year + "','"+status+"','"+type+"','"+telecaller+"','"+counsiller+"')";
+			System.out.println(sql);
 			int res = s.executeUpdate(sql,
 			Statement.RETURN_GENERATED_KEYS);
 			ResultSet rs = s.getGeneratedKeys();

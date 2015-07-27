@@ -11,14 +11,19 @@
 <%
 	String id = request.getParameter("id");	
 	String name = request.getParameter("name");
+	String mobile = request.getParameter("mobile");
 	String email = request.getParameter("email");
 	String qualification = request.getParameter("qualification");
 	String designation = request.getParameter("designation");
 	String currentlyin = request.getParameter("currentlyin");
 	String homephone = request.getParameter("homephone");
 	String address = request.getParameter("address");
-	
-	if (name == null) {
+	String type =request.getParameter("type"); 
+	String courseinterestedin  = request.getParameter("courseinterestedin");
+	if(courseinterestedin.contains("Other")){
+		courseinterestedin = request.getParameter("courseinterestedin");
+	}
+			if (name == null) {
 		out.print("Sorry. Invalid Access");
 	} else {
 		if (name.isEmpty()) {
@@ -28,7 +33,7 @@
 			
 			Connection con = DbConnection.getConnection();
 			Statement s = con.createStatement();
-			String sql = "UPDATE  `enquiry` SET  `name` =  '"+name+"',`email` =  '"+email+"',`qualification` =  '"+qualification+"',	`stream` =  '"+designation+"',`currentlyin` =  '"+currentlyin+"',`homephone` =  '"+homephone+"',`address` =  '"+address+"' WHERE `id` = '"+id+"';";
+			String sql = "UPDATE  `enquiry` SET  `name` =  '"+name+"',`mobile`='"+mobile+"',`courseinterested`='"+courseinterestedin+"',`email` =  '"+email+"',`stype` =  '"+type+"',`qualification` =  '"+qualification+"',	`stream` =  '"+designation+"',`currentlyin` =  '"+currentlyin+"',`homephone` =  '"+homephone+"',`address` =  '"+address+"' WHERE `id` = '"+id+"';";
 			int res = s.executeUpdate(sql);
 			if (res > 0) {
 				out.print("Update Success");
