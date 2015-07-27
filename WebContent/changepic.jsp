@@ -1,11 +1,10 @@
 
+<%@page import="java.io.File"%>
 <%@page import="mailing.SendMail"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="javax.sql.rowset.serial.SerialBlob"%>
 <%@page import="java.io.ByteArrayInputStream"%>
-<%@page import="sun.misc.IOUtils"%>
-
 <%@page import="access.DbConnection"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.io.FileInputStream"%>
@@ -14,15 +13,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="java.util.List"%>
-<%@page import="org.apache.tomcat.util.http.fileupload.FileItem"%>
-<%@page import="java.io.File"%>
-<%@page
-	import="org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory"%>
-<%@page
-	import="org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload"%>
-<%@page import="org.apache.tomcat.util.http.fileupload.FileUpload"%>
-<%@page import="org.apache.commons.fileupload.*"%>
+
 
 <%
 	String saveFile = "";
