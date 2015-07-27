@@ -76,7 +76,7 @@
 												<label class="col-lg-3 control-label">Email</label>
 												<div class="col-lg-8">
 													<input type="text" name="email" id="email"
-														data-type="email" class="form-control parsley-validated">
+														data-type="email" class="form-control parsley-validated" onchange = "getemail(this.value);">
 												</div>
 											</div>
 											<div class="form-group">
@@ -84,7 +84,7 @@
 												<div class="col-lg-8">
 													<input type="text" name="mobile" id="mobile"
 														data-required="true" data-type="phone"
-														class="form-control parsley-validated">
+														class="form-control parsley-validated" onchange= "getmobilenumber(this.value);">
 
 												</div>
 											</div>
@@ -207,6 +207,49 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+		function getmobilenumber(mn){
+			loadold(mn,"mobile");
+		}
+		function getemail(e){
+			loadold(e,"email");
+		}
+		function loadold(d,t){
+			var xmlhttp;
+			xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange=function(){
+				if(xmlhttp.readyState==4&&xmlhttp.status==200){
+					console.log($.trim(xmlhttp.responseText));
+					var jsontext  = JSON.parse($.trim(xmlhttp.responseText));
+					for (var i = 0; i < jsontext.enq.length; i++) {
+						 var counter = jsontext.enq[i];
+						 document.getElementById("name").value = counter.name;
+						 document.getElementById("email").value = counter.email;
+						 document.getElementById("qualification").value = counter.qualification;
+						 
+						 document.getElementById("designation").value = counter.stream;
+						 document.getElementById("currentlyin").value = counter.currentlyin;
+						 document.getElementById("homephone").value = counter.homephone;
+						 document.getElementById("address").value = counter.address;
+						 document.getElementById("mobile").value = counter.mobile;
+						
+					}
+				}
+			}
+			if(t=="mobile"){
+			xmlhttp.open("GET","getoldenq.jsp?mobile="+d,true);
+			}else if(t=="email")
+				{
+				xmlhttp.open("GET","getoldenq.jsp?email="+d,true);
+				}
+			
+			xmlhttp.send();
+			
+		
+		}
+		
+		</script>
 <script>
 $(document).ready(function(){
 	//Contact Details Update Start

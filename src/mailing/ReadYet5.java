@@ -54,6 +54,7 @@ public class ReadYet5 {
 						return new PasswordAuthentication(userName, password);
 					}
 				});
+		 Connection con = DbConnection.getConnection();
         try {
             store = session.getStore("imaps");
             store.connect();
@@ -74,7 +75,7 @@ public class ReadYet5 {
                 boolean already_read = false;
                 boolean ignore = false;               
                 
-                Connection con = DbConnection.getConnection();
+               
     			Statement s = con.createStatement();
     			String checksql = "SELECT * FROM `enquiry` WHERE `source`='YET5' AND `mailid`='"+msgno+"' ";
     			ResultSet rs2 = s.executeQuery(checksql);
@@ -317,6 +318,10 @@ public class ReadYet5 {
             e.printStackTrace();
         } catch (MessagingException e) {
             e.printStackTrace();
+        }finally{
+        	if(con!=null){
+        		con.close();
+        	}
         }
     }
  

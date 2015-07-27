@@ -255,6 +255,10 @@ public class ReadSulekha {
 			store.close();
 		} catch (MessagingException e) {
 			e.printStackTrace();
+		}finally{
+			if(con!=null){
+				con.close();
+			}
 		}
 		
 	}

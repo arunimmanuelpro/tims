@@ -247,6 +247,10 @@ public class ReadSulekha2 {
 						}
 					}catch (Exception e) {
 						e.printStackTrace();
+					}finally{
+						if(con!=null){
+							con.close();
+						}
 					}
 				} else {
 					System.out.println("Sorry No Data Found");
