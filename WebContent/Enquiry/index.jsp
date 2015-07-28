@@ -25,7 +25,11 @@
 				<div class="inbox-head" style="background-color: #F15656;">
 					<h3>
 						<i class="icon-folder-open"> <%
- 	if(request.getParameter("completed")!=null){out.println("Closed Enquires");}else{out.println("All Enquires");}
+ 	if(request.getParameter("completed")!=null){out.println("Closed Enquires");}
+ 	else if(request.getParameter("Follow")!=null){out.println("Follow Up");}
+ 	else if(request.getParameter("Duplicate")!=null){out.println("Duplicate");}
+ 	
+ 	else{out.println("All Enquires");}
  %>
 						</i>
 					</h3>
@@ -145,7 +149,20 @@
 										}
 
 									}
+									<%if(request.getParameter("completed")!=null){%>
+									xmlhttp.open("GET", "enqcompletedtable.jsp", true);
+									
+									<%}else if(request.getParameter("Follow")!=null){
+									%>
+									xmlhttp.open("GET", "enqfollowuptable.jsp", true);
+									<%
+									}else if(request.getParameter("Duplicate")!=null){
+										
+										%>
+										xmlhttp.open("GET", "enqduplicatetable.jsp", true);
+										<%}else{%>
 									xmlhttp.open("GET", "enqtable.jsp", true);
+									<%}%>
 									xmlhttp.send();
 								}
 								function drawTable(){

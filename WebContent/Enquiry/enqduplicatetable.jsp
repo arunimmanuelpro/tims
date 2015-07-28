@@ -11,7 +11,7 @@
 <%
 JSONArray ja = new JSONArray();
 Connection con  = DbConnection.getConnection();
-String sql = "SELECT * FROM enquiry WHERE `status` LIKE 'NEW'  order by id";
+String sql = "SELECT * FROM enquiry WHERE `status` LIKE 'DUPLICATE'  order by id";
 PreparedStatement ps = con.prepareStatement(sql);
 ResultSet rs = ps.executeQuery();
 while (rs.next()) {

@@ -216,8 +216,9 @@
 							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">Mail Enquiry</a></li>
 							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/newenquiry.jsp">New Enquiry</a></li>
 							
-							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">Follow Up</a></li>
-							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?completed">Closed</a></li>							
+							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/?Follow">Follow Up</a></li>
+							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?completed">Closed</a></li>		
+							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?Duplicate">Duplicate</a></li>							
 						</ul>
 					</li>	
 					<%  } %>		
