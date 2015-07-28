@@ -396,6 +396,54 @@ if(rs1.next()){
 				</section>
 				<!--  One Topic End -->
 
+			<!--  One Topic Start -->
+				<div class="inbox-head">
+					<h3>
+						<i class="icon-book"> Course Information</i>
+					</h3>
+					<form class="pull-right position" action="#">
+						<div class="input-append">
+							<a href="#assignbook" data-toggle="modal">
+								<button type="button" class="btn sr-btn">
+									<i class="icon-plus"></i>
+								</button>
+							</a>
+						</div>
+					</form>
+				</div>
+					<section class="panel">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Course Name</th>
+								<th>Fees</th>
+								<th>Status</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+	<%PreparedStatement ps = con1.prepareStatement(""); %>					
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						
+						
+						</tbody>
+						</table>
+						</section>
+					
+						
+						
+						
+				
+				
+				
+				
+				
 			</aside>
 		</div>
 	</section>
@@ -487,7 +535,7 @@ if(rs1.next()){
 						</div>
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
-								<button type="submit" class="btn btn-default">Sign in</button>
+								<button type="submit" class="btn btn-default">Save</button>
 							</div>
 						</div>
 					</form>
@@ -497,6 +545,8 @@ if(rs1.next()){
 			</div>
 		</div>
 	</div>
+	
+	<%con1.close(); %>
 	<script type="text/javascript">
 		$(document).ready(function() {
 

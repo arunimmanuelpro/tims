@@ -118,11 +118,11 @@
 			
 			$('.dtable').dataTable();
 			$('#sample_1').DataTable();
-			 /* $('#sample_2').DataTable({
+			 $('#sample_3').DataTable({
                
 				aaSorting : [[0, 'desc']]  
                           
-            }); */ 	
+            }); 	
 			 
 			 $(".datepicker").attr("placeholder","click to change");
 			$(".datepicker").datepicker({

@@ -4,7 +4,7 @@
 <%@page import="access.DbConnection"%>
 <%@page import="java.sql.Connection"%>
 
-
+<%request.setAttribute("title", "Student"); %>
 <%@include file="../Common/Header.jsp"%>
 <%
 		if(userroles.contains("view_students") || userroles.contains("add_student")){
@@ -49,7 +49,7 @@
 					<%} %>
 				</div>
 				<section class="panel">
-					<table class="table table-striped border-top" id="sample_1"
+					<table class="table table-striped border-top" id="sample_3"
 						class="dtable">
 						<thead>
 							<tr>

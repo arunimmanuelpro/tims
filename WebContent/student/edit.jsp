@@ -81,7 +81,7 @@ if(rs2.next()){
 								<div class="col-lg-10">
 									<input class="form-control" id="email" name="email"
 										placeholder="Email Address" type="text" data-required="true"
-										data-notblank="true" data-rangelength="[4,20]"
+										data-notblank="true" data-rangelength="[4,50]"
 										data-type="email"
 										value="<%=(rs2.getString("Emailaddress")==null?"":rs2.getString("Emailaddress"))%>">
 								</div>
@@ -148,9 +148,9 @@ if(rs2.next()){
 								<label for="dob" class="col-lg-2 control-label">Date Of
 									Birth</label>
 								<div class="col-lg-10">
-									<input class="form-control datepicker" id="dob" name="dob"
-										placeholder="Date Of Birth" type="text" data-required="true"
-										data-notblank="true" data-type="dateIso"
+									<input class="form-control" id="dob" name="dob"
+										placeholder="Date Of Birth" type="date" data-required="true"
+										data-notblank="true" 
 										value="<%=(rs2.getString("dateofbirth")==null?"":rs2.getString("dateofbirth"))%>">
 								</div>
 							</div>
@@ -159,7 +159,7 @@ if(rs2.next()){
 								<div class="col-lg-10">
 									<input class="form-control" id="stream" name="stream"
 										placeholder="Stream" type="text" data-required="true"
-										data-notblank="true" data-rangelength="[4,20]"
+										data-notblank="true" data-rangelength="[1,20]"
 										value="<%=(rs2.getString("stream")==null?"":rs2.getString("stream"))%>">
 								</div>
 							</div>
@@ -169,11 +169,11 @@ if(rs2.next()){
 									<input class="form-control" id="qualification"
 										name="qualification" placeholder="Qualification" type="text"
 										data-required="true" data-notblank="true"
-										data-rangelength="[4,10]"
+										data-rangelength="[1,10]"
 										value="<%=(rs2.getString("qualification")==null?"":rs2.getString("qualification"))%>">
 								</div>
 							</div>
-							<div class="form-group">
+						<%-- 	<div class="form-group">
 								<label for="totalfees" class="col-lg-2 control-label">Total
 									Fees</label>
 								<div class="col-lg-10">
@@ -183,7 +183,7 @@ if(rs2.next()){
 										data-type="number"
 										value="<%=(rs2.getString("totalfees")==null?"":rs2.getString("totalfees"))%>">
 								</div>
-							</div>
+							</div> --%>
 							<input type="hidden" name="stuid" value="<%=stuid%>">
 							<div class="form-group">
 								<div class="col-lg-offset-2 col-lg-10">

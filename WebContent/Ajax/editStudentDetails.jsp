@@ -30,7 +30,7 @@ if(fname==null || lname==null || mobile==null  || email==null  || aline1==null |
 		
 		
 		Connection con = DbConnection.getConnection();
-		PreparedStatement ps = con.prepareStatement("UPDATE students SET fName=?, lName=?, Mobile=?, Emailaddress=?, addressLine1=?, addressLine2=?,city=?,state=?,zipcode=?,homephone=?,totalfees=? WHERE id=?");
+		PreparedStatement ps = con.prepareStatement("UPDATE students SET fName=?, lName=?, Mobile=?, Emailaddress=?, addressLine1=?, addressLine2=?,city=?,state=?,zipcode=?,homephone=? WHERE id=?");
 		ps.setString(1, fname);
 		ps.setString(2, lname);
 		ps.setString(3, mobile);
@@ -41,8 +41,9 @@ if(fname==null || lname==null || mobile==null  || email==null  || aline1==null |
 		ps.setString(8, state);
 		ps.setString(9, zip);
 		ps.setString(10, hphone);
-		ps.setString(11, tfees);
-		ps.setString(12, stuid);
+		//ps.setString(11, tfees);
+		ps.setString(11, stuid);
+		System.out.println(ps);
 		int res = ps.executeUpdate();
 		if(res > 0){
 			out.print("1");
