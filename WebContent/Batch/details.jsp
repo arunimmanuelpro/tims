@@ -232,7 +232,7 @@
 									<%
 										Connection dbc4 = DbConnection.getConnection();
 										Statement s4 = dbc4.createStatement();
-										String sql4 = "SELECT * FROM students where `batchid` = '" + bid
+										String sql4 = "select a.id,a.fName,a.lName,a.Emailaddress,a.addressline1,a.addressline2,a.city,a.state,b.courseid,b.fees,b.batchid from students a,studentcourse b where a.id=b.studid and b.batchid= '" + bid
 												+ "' ";
 										rs = s4.executeQuery(sql4);
 										while (rs.next()) {
@@ -295,7 +295,7 @@
 							<tbody>
 								<%
 											s = con.createStatement();
-											sql = "SELECT * FROM students where `batchid` = '" + bid
+											sql = "select a.id,a.fName,a.lName,a.Emailaddress,a.addressline1,a.addressline2,a.city,a.state,b.courseid,b.fees,b.batchid from students a,studentcourse b where a.id=b.studid and b.batchid= '" + bid
 													+ "' ";
 											rs = s.executeQuery(sql);
 											while (rs.next()) {
