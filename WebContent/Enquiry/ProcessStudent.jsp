@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.ResultSet"%>
@@ -55,8 +56,8 @@
 			String cDat = sd.format(cDate);
 
 			// Switch to Student
-			String sql4 = "INSERT INTO `tims`.`students` (`id`, `fName`, `lName`, `Mobile`, `Emailaddress`, `addressline1`, `addressline2`, `city`, `state`, `zipcode`, `country`, `gender`, `homephone`, `dateofbirth`, `bloodgroup`, `joindate`, `stream`, `qualification`, `courseid`, `totalfees`, `batchid`, `status`) VALUES (NULL, '"+name+"', 'EOS', '"+mobile+"', '"+email+"', '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '"+cDat+"', NULL, '"+qua+"', NULL, NULL, NULL, 'NEW');";
-			System.out.println(sql4);
+			String sql4 = "INSERT INTO `tims`.`students` (`id`, `fName`, `lName`, `Mobile`, `Emailaddress`, `addressline1`, `addressline2`, `city`, `state`, `zipcode`, `country`, `gender`, `homephone`, `dateofbirth`, `bloodgroup`, `joindate`, `stream`, `qualification`, `status`) VALUES (NULL, '"+name+"', 'EOS', '"+mobile+"', '"+email+"', '"+address+"', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '"+cDat+"', NULL, '"+qua+"',  'NEW');";
+		
 			s.executeUpdate(sql4);
 			
 			response.sendRedirect("../student");			
@@ -64,7 +65,7 @@
 		} else {
 			out.print("Enquiry data not found.");
 		}
-
+dbc.close();
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

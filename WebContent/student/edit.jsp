@@ -63,7 +63,7 @@ if(rs2.next()){
 								<div class="col-lg-10">
 									<input class="form-control" id="lastname" name="lastname"
 										placeholder="LastName" type="text" data-required="true"
-										data-notblank="true" data-rangelength="[1,15]"
+										data-notblank="true" data-rangelength="[1,30]"
 										value="<%=(rs2.getString("lName")==null?"":rs2.getString("lName"))%>">
 								</div>
 							</div>
@@ -86,6 +86,46 @@ if(rs2.next()){
 										value="<%=(rs2.getString("Emailaddress")==null?"":rs2.getString("Emailaddress"))%>">
 								</div>
 							</div>
+							
+								<div class="form-group">
+								<label for="stream" class="col-lg-2 control-label">Blood Group</label>
+								<div class="col-lg-10">
+								<select  class="form-control" name = "bloodgroup">
+								
+								<%
+								String blood = rs2.getString("bloodgroup");
+								if(blood==null || blood.isEmpty()){ %>
+														<option value="O+ve">O+ve</option>
+                                                        <option value="O-ve">O-ve</option>
+                                                        <option value="A+ve">A+ve</option>
+                                                        <option value="A-ve">A-ve</option>
+                                                        <option value="B+ve">B+ve</option>
+                                                        <option value="B-ve">B-ve</option>
+                                                        <option value="AB+ve">AB+ve</option>
+                                                        <option value="AB-ve">AB-ve</option>
+                                                        <option value="A1B+ve">A1B+ve</option>
+                                                        <option value="A2B+ve">A2B+ve</option>														
+														<% }else{ %>
+														<option value="O+ve" <%if(blood.equals("O+ve"))out.println("Selected"); %>>O+ve</option>
+														<option value="O-ve" <%if(blood.equals("O-ve"))out.println("Selected"); %>>O-ve</option>
+														<option value="A+ve" <%if(blood.equals("A+ve"))out.println("Selected"); %>>A+ve</option>
+														<option value="A-ve" <%if(blood.equals("A-ve"))out.println("Selected"); %>>A-ve</option>
+														<option value="B+ve" <%if(blood.equals("B+ve"))out.println("Selected"); %>>B+ve</option>
+														<option value="B-ve" <%if(blood.equals("B-ve"))out.println("Selected"); %>>B-ve</option>
+														<option value="AB+ve" <%if(blood.equals("AB+ve"))out.println("Selected"); %>>AB+ve</option>
+														<option value="AB-ve" <%if(blood.equals("AB-ve"))out.println("Selected"); %>>AB-ve</option>
+														<option value="A1B+ve" <%if(blood.equals("A1B+ve"))out.println("Selected"); %>>A1B+ve</option>
+														<option value="A2B+ve" <%if(blood.equals("A2B+ve"))out.println("Selected"); %>>A2B+ve</option>
+														<% } %>
+								
+								
+								</select>
+								
+								
+								</div>
+							</div>
+							
+							
 							<div class="form-group">
 								<label for="addresline1" class="col-lg-2 control-label">Address
 									Line1</label>
@@ -221,7 +261,7 @@ if(rs2.next()){
 
 			$.ajax({
 				url : "../Ajax/editStudentDetails.jsp",
-				type : "POST",
+				type : "GET",
 				data : str,
 				success : function(data, textStatus, jqXHR) {
 					if (data == 1) {

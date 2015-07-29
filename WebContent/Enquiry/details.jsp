@@ -1,3 +1,7 @@
+<%@page import="java.util.TreeSet"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.Statement"%>
@@ -7,6 +11,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
+Connection con3 = DbConnection.getConnection();
+
+
 	int id = 0;
 	String strid = request.getParameter("id");
 	if (strid != null) {
@@ -23,8 +30,8 @@
 		//error
 		valid = false;
 	} else {
-		Connection dbc = DbConnection.getConnection();
-		Statement s = dbc.createStatement();
+		
+		Statement s = con3.createStatement();
 		String sql = "SELECT * FROM enquiry where `id`='" + id + "'";
 		ResultSet rs = s.executeQuery(sql);
 		if (rs.next()) {
@@ -46,6 +53,48 @@
 	valid = false;
 		}
 	}
+	//Check Duplicate
+
+	boolean duplicate=false;
+	
+	PreparedStatement ps = con3.prepareStatement("select * from enquiry where mobile = ?	 and mobile!=''");
+	ps.setString(1, mobile);
+	ResultSet r = ps.executeQuery();
+	List<Integer> mobduplicate = new LinkedList<Integer>();
+	List<Integer> emailduplicate = new LinkedList<Integer>();
+	while(r.next()){
+		mobduplicate.add(r.getInt(1));
+	}
+	for(int i = 0; i<mobduplicate.size();i++){
+		if(mobduplicate.get(i)==id){
+			mobduplicate.remove(i);
+		}
+	}
+
+	if(mobduplicate.size()>0){
+		duplicate=true;
+	}
+//Email Duplication
+	
+	r.first();
+	ps = con3.prepareStatement("select * from enquiry where email = ?and email!=''");
+	ps.setString(1, email);
+	r = ps.executeQuery();
+	while(r.next()){
+		emailduplicate.add(r.getInt(1));
+	}
+	for(int i = 0; i<emailduplicate.size();i++){
+		if(emailduplicate.get(i)==id){
+			emailduplicate.remove(i);
+		}
+	}
+	if(emailduplicate.size()>0){
+		duplicate=true;
+	}
+	
+	
+	
+	
 	if (!valid) {
 		RequestDispatcher rds = request
 		.getRequestDispatcher("error.jsp");
@@ -79,6 +128,8 @@
 					</div>
 					<div class="col-xs-6">
 						<section class="panel text-center">
+							
+							
 							<div class="panel-body">
 								<a class="btn btn-circle btn-lg btn-success"><i
 									class="fa fa-user"></i></a>
@@ -289,13 +340,22 @@
 									href="ProcessStudent.jsp?id=<%=id%>"
 									class="btn btn-success">SWITCH TO STUDENT</a> 
 									<%
-									if(!status.contains("DUPLICATE")){ %>
+							}
+									if(!status.contains("DUPLICATE") ){ 
+										if(duplicate){
+											%>
+											<a
+												href="../Ajax/enquiryoperations.jsp?bid=<%=id%>&operation=DUPLICATE"
+												class="btn btn-danger">DUPLICATE ENQUIRY</a>	
+										<%
+												}else{
+									%>
 									<a
 									href="../Ajax/enquiryoperations.jsp?bid=<%=id%>&operation=DUPLICATE"
 									class="btn btn-warning">DUPLICATE ENQUIRY</a>
-									
 									<%
-									}} %>
+									}
+									} %>
 							</div>
 						</section>
 					</div>
@@ -306,7 +366,7 @@
 							<header class="panel-heading"> Today </header>
 							<div>
 								<%
-									Connection con3 = DbConnection.getConnection();
+								
 														Statement st;
 														String sqlq;
 														ResultSet rss;
@@ -321,7 +381,7 @@
 														sqlq = "SELECT * FROM enquiry_data where `followon` = '" + todayd
 																+ "' AND `enquiry_id` = '" + id
 																+ "' ORDER BY id DESC LIMIT 1";
-														System.out.println(sqlq);
+														
 														rss = st.executeQuery(sqlq);
 														if (rss.next()) {
 															String callin = rss.getString("callin");
@@ -472,8 +532,8 @@
 									</thead>
 									<tbody>
 										<%
-											Connection dbc = DbConnection.getConnection();
-											Statement s = dbc.createStatement();
+											
+											Statement s = con3.createStatement();
 											String sql = "SELECT * FROM enquiry_data where `enquiry_id` = '"
 													+ id + "' ";
 											ResultSet rs = s.executeQuery(sql);
@@ -515,10 +575,72 @@
 					</div>
 				</div>
 
+
+<%if(duplicate){ %>
+				<div class="row">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header class="panel-heading">
+								<span class="label bg-danger pull-right"></span> Duplicate
+							</header>
+							<div>
+								<table class="table table-striped m-b-none text-small">
+									<thead>
+										<tr>
+											<th>Source</th>
+											<th>Name</th>
+											<th>Course</th>
+											<th>Message</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%Set<Integer> uniqueid = new TreeSet<Integer>();
+									
+										for(int i = 0;i<mobduplicate.size();i++){
+											uniqueid.add(mobduplicate.get(i));
+										}
+										for(int i = 0;i<emailduplicate.size();i++){
+											uniqueid.add(emailduplicate.get(i));
+										}
+										for(int i : uniqueid){
+										ps  = con3.prepareStatement("select * from enquiry where id = ?");
+										ps.setInt(1,i);
+										rs = ps.executeQuery();
+										if(rs.next()){
+										%>
+										<tr>
+											<td><%=rs.getString("source") %></td>
+											<td><%=rs.getString("name") %></td>
+											<td><%=rs.getString("courseinterested") %></td>
+											<td><%PreparedStatement
+											 ps1 = con3.prepareStatement("select * from enquiry_data where enquiry_id = ?");
+											ps1.setInt(1, i);
+											ResultSet rs1 = ps1.executeQuery();
+											if(rs1.next()){
+											 %>
+											 <%=rs1.getString("message") %>
+											 
+											 <%} %>
+											 </td>
+											<td><%=rs.getString("status") %></td>
+										</tr>
+										
+										
+										<%}} %>
+									</tbody>
+								</table>
+							</div>
+						</section>
+					</div>
+				</div>
+
+<%} %>
+
 			</div>
 		</div>
 
 	</section>
 </section>
-
+<%con3.close(); %>
 <%@ include file="../Common/Footer.jsp"%>

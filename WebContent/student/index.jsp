@@ -57,7 +57,7 @@
 								<th>Name</th>
 								<th>Mobile</th>
 								<th>Join Date</th>
-								<th>Batch ID</th>
+							<!-- 	<th>Batch ID</th> -->
 								<th>Status</th>
 								<th>Edit</th>
 							</tr>
@@ -72,7 +72,7 @@
 									<%=(studetails.getString("lname")==null?"":studetails.getString("lname"))%></td>
 								<td><%=(studetails.getString("Mobile")==null?"":studetails.getString("Mobile"))%></td>
 								<td><%=(studetails.getString("joindate")==null?"":studetails.getString("joindate"))%></td>
-								<td><%=studetails.getString("batchid")==null?"NOT ASSIGNED":studetails.getString("batchid")%></td>
+							<%-- 	<td><%=studetails.getString("batchid")==null?"NOT ASSIGNED":studetails.getString("batchid")%></td> --%>
 								<td><%=(studetails.getString("status")==null?"":studetails.getString("status"))%>
 								<td><a class="btn btn-info btn-xs"
 									href="profile.jsp?id=<%=studetails.getString(1)%>"> <i

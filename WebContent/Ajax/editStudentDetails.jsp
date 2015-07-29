@@ -16,21 +16,23 @@ String city = request.getParameter("city");
 String state = request.getParameter("state");
 String zip = request.getParameter("zipcode");
 String hphone = request.getParameter("homephone");
-String tfees = request.getParameter("totalfees");
-
+String dob = request.getParameter("dob");
+String stream = request.getParameter("stream");
+String bloodgroup = request.getParameter("bloodgroup");
+String qualification = request.getParameter("qualification");
 String stuid = request.getParameter("stuid");
 
-if(fname==null || lname==null || mobile==null  || email==null  || aline1==null || aline2==null || city==null || state==null || zip==null || hphone==null || tfees==null){
+if(fname==null || lname==null || mobile==null  || email==null  || aline1==null || aline2==null || city==null || state==null || zip==null || hphone==null){
 	out.print("33");
 }else{
-	if(fname.isEmpty() || lname.isEmpty() || mobile.isEmpty() || email.isEmpty() || aline1.isEmpty() || aline2.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty() || hphone.isEmpty() || tfees.isEmpty()){
+	if(fname.isEmpty() || lname.isEmpty() || mobile.isEmpty() || email.isEmpty() || aline1.isEmpty() || aline2.isEmpty() || city.isEmpty() || state.isEmpty() || zip.isEmpty() || hphone.isEmpty()){
 		out.print("22");
 	}else{
 		//Actual Processing
 		
 		
 		Connection con = DbConnection.getConnection();
-		PreparedStatement ps = con.prepareStatement("UPDATE students SET fName=?, lName=?, Mobile=?, Emailaddress=?, addressLine1=?, addressLine2=?,city=?,state=?,zipcode=?,homephone=? WHERE id=?");
+		PreparedStatement ps = con.prepareStatement("UPDATE students SET fName=?, lName=?, Mobile=?, Emailaddress=?, addressLine1=?, addressLine2=?,city=?,state=?,zipcode=?,homephone=?,dateofbirth=?,stream=?,bloodgroup=?,qualification=? WHERE id=?");
 		ps.setString(1, fname);
 		ps.setString(2, lname);
 		ps.setString(3, mobile);
@@ -41,8 +43,11 @@ if(fname==null || lname==null || mobile==null  || email==null  || aline1==null |
 		ps.setString(8, state);
 		ps.setString(9, zip);
 		ps.setString(10, hphone);
-		//ps.setString(11, tfees);
-		ps.setString(11, stuid);
+		ps.setString(11, dob);
+		ps.setString(12, stream);
+		ps.setString(13, bloodgroup);
+		ps.setString(14, qualification);
+		ps.setString(15, stuid);
 		System.out.println(ps);
 		int res = ps.executeUpdate();
 		if(res > 0){
@@ -52,6 +57,7 @@ if(fname==null || lname==null || mobile==null  || email==null  || aline1==null |
 		}else
 			out.print("0");
 		//Actual End
+		con.close();
 	}
 }
 %>

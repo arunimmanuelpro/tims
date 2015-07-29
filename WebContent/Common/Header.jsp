@@ -150,6 +150,25 @@
 						<span>Dashboard</span>
 					</a>
 				</li>
+				
+				<%	if (jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4") || jobTitle.equals("5") || jobTitle.equals("10") || jobTitle.equals("11") || jobTitle.equals("12")) {	%>
+					<li class="sub-menu">
+						<a href="javascript:;" class=""> 
+							<i class="fa fa-gears"></i><span>Enquiry</span> <span class="arrow"></span>
+						</a>
+						<ul class="sub">							
+							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">Mail Enquiry</a></li>
+							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/newenquiry.jsp">New Enquiry</a></li>
+							
+							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/?Follow">Follow Up</a></li>
+							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?completed">Closed</a></li>		
+							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?Duplicate">Duplicate</a></li>							
+						</ul>
+					</li>	
+					<%  } %>		
+				
+				
+				
 					<li class="sub-menu">
 						<a href="javascript:;"> 
 							<i class="fa fa-eye"></i><span>Employee</span>							
@@ -207,21 +226,7 @@
 							<li><a class=""	href="<%=request.getContextPath()%>/Leave/leaveList.jsp"> Leave List</a></li>															
 						</ul>
 					</li> 
-					<%	if (jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4") || jobTitle.equals("5") || jobTitle.equals("10") || jobTitle.equals("11") || jobTitle.equals("12")) {	%>
-					<li class="sub-menu">
-						<a href="javascript:;" class=""> 
-							<i class="fa fa-gears"></i><span>Enquiry</span> <span class="arrow"></span>
-						</a>
-						<ul class="sub">							
-							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">Mail Enquiry</a></li>
-							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/newenquiry.jsp">New Enquiry</a></li>
-							
-							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/?Follow">Follow Up</a></li>
-							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?completed">Closed</a></li>		
-							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?Duplicate">Duplicate</a></li>							
-						</ul>
-					</li>	
-					<%  } %>		
+					
 					<%	if (jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4") || jobTitle.equals("5") || jobTitle.equals("10") || jobTitle.equals("11") || jobTitle.equals("12") || jobTitle.equals("7") || jobTitle.equals("8") || jobTitle.equals("9")) {	%>	
 					<li class="sub-menu"> <a href="javascript:;" class=""> 
 						<i class="fa fa-sitemap"></i><span>Students</span><span class="arrow"></span>

@@ -108,13 +108,10 @@
 
 									if ($('#sample_2').size() > 0) {
 										addElements();
-										oTable.fnClearTable();
-										/*  for (var i = 0; i < anSelected.length; i++) {
-      										  oTable.fnDeleteRow(anSelected[i]);
-    										}; */
+										oTable.fnClearTable();							
 									drawTable();
 									}
-								}, 10000); // refresh every 5000 milliseconds
+								}, 10000); 
 								function addElements() {
 									var xmlhttp;
 
@@ -126,7 +123,7 @@
 											//Parse JSON
 											var jsontext = JSON
 													.parse(xmlhttp.responseText);
-											//console.log(jsontext.enq.length);
+										
 											for ( var i = 0; i < jsontext.enq.length; i++) {
 												var counter = jsontext.enq[i];
 												var loc = "details.jsp?id="+counter.id;
@@ -140,9 +137,9 @@
 																counter.status,
 																counter.followon,
 																counter.done,
-																"<a class='btn btn-info btn-xs'	 href="+loc+"><i class='icon-wrench'></i>More...</a>" ]);
+																"<a class='btn btn-info btn-xs '	 href="+loc+"><i class='icon-wrench'></i>More...</a>" ]);
 												 var nRow = oTable.fnGetNodes(aiNew[0]);
-												// editRow(oTable, nRow);
+											
 												
 												
 											}

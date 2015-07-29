@@ -14,6 +14,7 @@ String amount = request.getParameter("amount");
 String paymode = request.getParameter("paymode");
 String nextduedate = request.getParameter("nextduedate");
 String studentid = request.getParameter("studentid");
+int towards = Integer.parseInt(request.getParameter("towards"));
 
 if(amount==null || paymode==null || nextduedate==null  || studentid==null){
 	out.print("33");
@@ -30,13 +31,14 @@ if(amount==null || paymode==null || nextduedate==null  || studentid==null){
 		String cDat = sd.format(cDate);
 		
 		Connection con = DbConnection.getConnection();
-		PreparedStatement ps = con.prepareStatement("INSERT INTO `payments`(`studentid`, `amount`, `method`, `date`, `collectedbyid`, `nextdue`) VALUES (?,?,?,?,?,?)");
+		PreparedStatement ps = con.prepareStatement("INSERT INTO `payments`(`studentid`, `amount`, `method`, `date`, `collectedbyid`, `nextdue`,`towards`) VALUES (?,?,?,?,?,?,?)");
 		ps.setString(1, studentid);
 		ps.setString(2, amount);
 		ps.setString(3, paymode);
 		ps.setString(4, cDat);
 		ps.setString(5, userid);
 		ps.setString(6, (nextduedate.equalsIgnoreCase("")?null:nextduedate));
+		ps.setInt(7, towards);
 		int res = ps.executeUpdate();
 		if(res > 0){
 			out.print("1");
@@ -59,6 +61,7 @@ if(amount==null || paymode==null || nextduedate==null  || studentid==null){
 		}else
 			out.print("0");
 		//Actual End
+		con.close();
 	}
 }
 
