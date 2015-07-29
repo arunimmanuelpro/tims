@@ -167,7 +167,17 @@
 					</li>	
 					<%  } %>		
 				
-				
+				<%	if (jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4") || jobTitle.equals("5") || jobTitle.equals("10") || jobTitle.equals("11") || jobTitle.equals("12") || jobTitle.equals("7") || jobTitle.equals("8") || jobTitle.equals("9")) {	%>	
+					<li class="sub-menu"> <a href="javascript:;" class=""> 
+						<i class="fa fa-sitemap"></i><span>Students</span><span class="arrow"></span>
+					</a>
+						<ul class="sub">
+							<li><a class="" href="<%=request.getContextPath()%>/student/">Pursuing</a></li>						
+							<li><a class="" href="<%=request.getContextPath()%>/student/comingsoon.jsp">Alumni</a></li>
+							<li><a class="" href="<%=request.getContextPath()%>/student/comingsoon.jsp">View All</a></li>
+						</ul>
+					</li>					
+				<%	}  %>
 				
 					<li class="sub-menu">
 						<a href="javascript:;"> 
@@ -227,17 +237,7 @@
 						</ul>
 					</li> 
 					
-					<%	if (jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4") || jobTitle.equals("5") || jobTitle.equals("10") || jobTitle.equals("11") || jobTitle.equals("12") || jobTitle.equals("7") || jobTitle.equals("8") || jobTitle.equals("9")) {	%>	
-					<li class="sub-menu"> <a href="javascript:;" class=""> 
-						<i class="fa fa-sitemap"></i><span>Students</span><span class="arrow"></span>
-					</a>
-						<ul class="sub">
-							<li><a class="" href="<%=request.getContextPath()%>/student/">Pursuing</a></li>						
-							<li><a class="" href="<%=request.getContextPath()%>/student/comingsoon.jsp">Alumni</a></li>
-							<li><a class="" href="<%=request.getContextPath()%>/student/comingsoon.jsp">View All</a></li>
-						</ul>
-					</li>					
-				<%	}  %>
+					
 						<li class="sub-menu">
 							<a href="javascript:;" class=""> 
 							<i class="fa fa-group"></i><span>Batch</span><span class="arrow"></span> </a>

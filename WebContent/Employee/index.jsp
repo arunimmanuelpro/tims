@@ -44,6 +44,7 @@ $(document).ready(function(){
 		var uid="";
 	$('input[name="empid"]:checked').each(function() {
 		uid += this.value+",";   
+		console.log(this.value);
 	});
 	uid=uid.substring(0,uid.length - 1);	
 	var xmlhttp;	

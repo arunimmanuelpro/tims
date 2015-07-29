@@ -165,16 +165,13 @@ public class ReadJustDial {
 				ArrayList<String> details2 = new ArrayList<String>();
 				if (parsedcontent != null && !already_read) {
 					if (parsedcontent.length() > 0) {
-
-						// System.out.println("MP ----------------"+parsedcontent);
-
 						Pattern pattern = Pattern
 								.compile("<td valign=\"top\">(.*?)</td>");
 						Matcher matcher = pattern.matcher(parsedcontent);
 
 						while (matcher.find()) {
 							details2.add(matcher.group(1));
-							// System.out.println(matcher.group(1));
+						
 							gotdata = false;
 						}
 					} else {

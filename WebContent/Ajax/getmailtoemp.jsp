@@ -25,9 +25,14 @@
 		ResultSet rs = ps.executeQuery();
 		JSONArray ja = new JSONArray();
 		while(rs.next()){
+			String email = new SecureNew().decrypt(rs.getString(1));
+			if(email!=null){
 			JSONObject jo = new JSONObject();
-			jo.put("email", new SecureNew().decrypt(rs.getString(1)));	
+			
+			
+			jo.put("email", email);	
 			ja.put(jo);
+			}
 		}
 		con.close();
 		out.println(ja);
