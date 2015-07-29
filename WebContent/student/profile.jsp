@@ -14,7 +14,7 @@
 <%@include file="../Common/Header.jsp"%>
 
 <%
-long bal = 0;
+	long bal = 0;
 int totalfees =0;
 	Connection con1;int amt_paid;String sql,sql3;
 	ResultSet rs1 = null,allpayments=null,paymentdetails = null,bookdetails = null,certdetails = null;
@@ -61,7 +61,7 @@ if(rs1.next()){
 		 totalfees+=rs.getInt("fees");
 		}
 }else{
-	//response.sendRedirect(request.getContextPath()+"/error.jsp");
+	response.sendRedirect(request.getContextPath()+"/error.jsp");
 	return;
 }
 %>
@@ -74,11 +74,11 @@ if(rs1.next()){
 			<aside class="profile-nav col-lg-3">
 				<section class="panel">
 					<div class="user-heading round">
-		
+
 						<h1><%=(rs1.getString("fName")==null?"":rs1.getString("fName"))%>
 							<%=(rs1.getString("lName")==null?"":rs1.getString("lName"))%>
 						</h1>
-					
+
 					</div>
 
 					<ul class="nav nav-pills nav-stacked">
@@ -89,13 +89,18 @@ if(rs1.next()){
 						<li><a href="edit.jsp?id=<%=stuid%>"> <i
 								class="icon-edit"></i> Edit Student details
 						</a></li>
-						<%if(!rs1.getString("status").equalsIgnoreCase("NEW")){
-							%>
-						<li><%-- <a href="invoice.jsp?id=<%= stuid %>"><i
-								class="icon-inr"></i> --%>
-								<a href = "comingsoon.jsp">VIEW INVOICE</a></li>
-						<%} %>
-					
+						<%
+							if(!rs1.getString("status").equalsIgnoreCase("NEW")){
+						%>
+						<li>
+							<%-- <a href="invoice.jsp?id=<%= stuid %>"><i
+								class="icon-inr"></i> --%> <a href="comingsoon.jsp">VIEW
+								INVOICE</a>
+						</li>
+						<%
+							}
+						%>
+
 
 					</ul>
 
@@ -105,124 +110,93 @@ if(rs1.next()){
 
 				<section class="panel">
 					<div class="panel-body bio-graph-info">
-	
+
 						<h1>Bio Graph</h1>
 						<div class="row">
 							<div class="bio-row">
-								<span>
-									<span>First Name </span>:<%=(rs1.getString("fName")==null?"":rs1.getString("fName"))%>
+								<span> <span>First Name </span>:<%=(rs1.getString("fName")==null?"":rs1.getString("fName"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Last Name </span>:
-									<%=(rs1.getString("lName")==null?"":rs1.getString("lName"))%>
+								<span> <span>Last Name </span>: <%=(rs1.getString("lName")==null?"":rs1.getString("lName"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Location </span>:
-									<%=(rs1.getString("city")==null?"":rs1.getString("city")+",")%>
+								<span> <span>Location </span>: <%=(rs1.getString("city")==null?"":rs1.getString("city")+",")%>
 									<%=(rs1.getString("state")==null?"":rs1.getString("state")+",")%>
 									<%=(rs1.getString("country")==null?"":rs1.getString("country")+".")%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Birthday</span>:
-									<%=(rs1.getString("dateofbirth")==null?"":rs1.getString("dateofbirth"))%>
+								<span> <span>Birthday</span>: <%=(rs1.getString("dateofbirth")==null?"":rs1.getString("dateofbirth"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Mobile </span>:
-									<%=(rs1.getString("Mobile")==null?"":rs1.getString("Mobile"))%>
+								<span> <span>Mobile </span>: <%=(rs1.getString("Mobile")==null?"":rs1.getString("Mobile"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Email Address</span>:
-									<%=(rs1.getString("Emailaddress")==null?"":rs1.getString("Emailaddress"))%>
+								<span> <span>Email Address</span>: <%=(rs1.getString("Emailaddress")==null?"":rs1.getString("Emailaddress"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Address</span>:
-									<%=(rs1.getString("addressline1")==null?"":rs1.getString("addressline1")+",")%>
+								<span> <span>Address</span>: <%=(rs1.getString("addressline1")==null?"":rs1.getString("addressline1")+",")%>
 									<%=(rs1.getString("addressline2")==null?"":rs1.getString("addressline2"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Stream:</span>:
-									<%=(rs1.getString("stream")==null?"":rs1.getString("stream"))%>
+								<span> <span>Stream:</span>: <%=(rs1.getString("stream")==null?"":rs1.getString("stream"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Qualification</span>:
-									<%=(rs1.getString("qualification")==null?"":rs1.getString("qualification"))%>
+								<span> <span>Qualification</span>: <%=(rs1.getString("qualification")==null?"":rs1.getString("qualification"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Blood Group </span>:
-									<%=(rs1.getString("bloodgroup")==null?"":rs1.getString("bloodgroup"))%>
+								<span> <span>Blood Group </span>: <%=(rs1.getString("bloodgroup")==null?"":rs1.getString("bloodgroup"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Home Phone </span>:
-									<%=(rs1.getString("homephone")==null?"":rs1.getString("homephone"))%>
+								<span> <span>Home Phone </span>: <%=(rs1.getString("homephone")==null?"":rs1.getString("homephone"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Join Date</span>:
-									<%=(rs1.getString("joindate")==null?"":rs1.getString("joindate"))%>
+								<span> <span>Join Date</span>: <%=(rs1.getString("joindate")==null?"":rs1.getString("joindate"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Status</span>:
-									<%=(rs1.getString("status")==null?"":rs1.getString("status"))%>
+								<span> <span>Status</span>: <%=(rs1.getString("status")==null?"":rs1.getString("status"))%>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Total Fees </span>:
-									<%
-										 out.print(totalfees);
-									%>
+								<span> <span>Total Fees </span>: <%
+ 	out.print(totalfees);
+ %>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Balance </span>:
-									<%
-										bal = totalfees - amt_paid; out.print(bal);
-									%>
+								<span> <span>Balance </span>: <%
+ 	bal = totalfees - amt_paid; out.print(bal);
+ %>
 								</span>
 							</div>
 							<div class="bio-row">
-								<span>
-									<span>Payment Status</span>:
-									<%
-										if(bal==0 && (totalfees!=0)){
-																		out.print("<b class='text-success'>Payment Cleared</b>");
-																	}else if(bal>0){
-																		out.print("<b class='text-warning'>Payment Pending</b>");
-																	}else if(totalfees==0 && bal==0){
-																		out.print("<b class='text-success'>Fees not discussed</b>");
-																	}
-									%>
+								<span> <span>Payment Status</span>: <%
+ 	if(bal==0 && (totalfees!=0)){
+ 																out.print("<b class='text-success'>Payment Cleared</b>");
+ 															}else if(bal>0){
+ 																out.print("<b class='text-warning'>Payment Pending</b>");
+ 															}else if(totalfees==0 && bal==0){
+ 																out.print("<b class='text-success'>Fees not discussed</b>");
+ 															}
+ %>
 								</span>
 							</div>
 						</div>
 
 					</div>
-					
-				
+
+
 				</section>
 				<!--  One Topic Start -->
 				<div class="inbox-head">
@@ -253,8 +227,8 @@ if(rs1.next()){
 						</thead>
 						<tbody>
 							<%
-							if(bookdetails!=null){
-								while (bookdetails.next()) {
+								if(bookdetails!=null){
+													while (bookdetails.next()) {
 							%>
 							<tr>
 								<td><%=(bookdetails.getString(1)==null?"":bookdetails.getString(1))%></td>
@@ -264,10 +238,10 @@ if(rs1.next()){
 								<td>
 									<%
 										boolean delivered = true;
-																						Statement sbook = con1.createStatement();
-																						String bsql = "SELECT * FROM `student_books` WHERE `bookid`='"+bookdetails.getString(1)+"' AND `studentid`='"+stuid+"' LIMIT 1";
-																						ResultSet rsb = sbook.executeQuery(bsql);
-																						if(rsb.next()) out.print("DELIVERED"); else{ out.print("PENDING"); delivered = false;}
+																													Statement sbook = con1.createStatement();
+																													String bsql = "SELECT * FROM `student_books` WHERE `bookid`='"+bookdetails.getString(1)+"' AND `studentid`='"+stuid+"' LIMIT 1";
+																													ResultSet rsb = sbook.executeQuery(bsql);
+																													if(rsb.next()) out.print("DELIVERED"); else{ out.print("PENDING"); delivered = false;}
 									%>
 								</td>
 								<td>
@@ -283,7 +257,7 @@ if(rs1.next()){
 							</tr>
 							<%
 								}
-							}
+												}
 							%>
 						</tbody>
 					</table>
@@ -315,10 +289,10 @@ if(rs1.next()){
 								<th></th>
 							</tr>
 						</thead>
-						 <tbody>
+						<tbody>
 							<%
-							if(certdetails!=null){
-								while (certdetails.next()) {
+								if(certdetails!=null){
+													while (certdetails.next()) {
 							%>
 							<tr>
 								<td><%=(certdetails.getString(1)==null?"":certdetails.getString(1))%></td>
@@ -327,10 +301,10 @@ if(rs1.next()){
 								<td>
 									<%
 										boolean delivered = true;
-																						Statement sbook = con1.createStatement();
-																						String bsql = "SELECT * FROM `students_certificate` WHERE `certificateid`='"+certdetails.getString(1)+"' AND `studentid`='"+stuid+"' LIMIT 1";
-																						ResultSet rsb = sbook.executeQuery(bsql);
-																						if(rsb.next()) out.print("DELIVERED"); else{ out.print("PENDING"); delivered = false;}
+																													Statement sbook = con1.createStatement();
+																													String bsql = "SELECT * FROM `students_certificate` WHERE `certificateid`='"+certdetails.getString(1)+"' AND `studentid`='"+stuid+"' LIMIT 1";
+																													ResultSet rsb = sbook.executeQuery(bsql);
+																													if(rsb.next()) out.print("DELIVERED"); else{ out.print("PENDING"); delivered = false;}
 									%>
 								</td>
 								<td>
@@ -345,9 +319,9 @@ if(rs1.next()){
 							</tr>
 							<%
 								}
-							}
+												}
 							%>
-						</tbody> 
+						</tbody>
 					</table>
 				</section>
 				<!--  One Topic End -->
@@ -381,8 +355,8 @@ if(rs1.next()){
 						<tbody>
 							<%
 								Statement s3 = con1.createStatement();
-																		paymentdetails = s3.executeQuery(sql3);
-																		while (paymentdetails.next()) {
+																							paymentdetails = s3.executeQuery(sql3);
+																							while (paymentdetails.next()) {
 							%>
 							<tr>
 								<td><%=(paymentdetails.getString(1)==null?"":paymentdetails.getString(1))%></td>
@@ -400,7 +374,7 @@ if(rs1.next()){
 				</section>
 				<!--  One Topic End -->
 
-			<!--  One Topic Start -->
+				<!--  One Topic Start -->
 				<div class="inbox-head">
 					<h3>
 						<i class="icon-book"> Course Information</i>
@@ -415,7 +389,7 @@ if(rs1.next()){
 						</div>
 					</form>
 				</div>
-					<section class="panel">
+				<section class="panel">
 					<table class="table">
 						<thead>
 							<tr>
@@ -423,62 +397,62 @@ if(rs1.next()){
 								<th>Course Name</th>
 								<th>Fees</th>
 								<th>Bach</th>
-								
+
 							</tr>
 						</thead>
 						<tbody>
-	<%PreparedStatement ps = con1.prepareStatement("select * from studentcourse where studid = ?");
-		ps.setInt(1, Integer.parseInt(stuid));
-		ResultSet rs  = ps.executeQuery();
-		while(rs.next()){
-	%>					
+							<%
+								PreparedStatement ps = con1.prepareStatement("select * from studentcourse where studid = ?");
+									ps.setInt(1, Integer.parseInt(stuid));
+									ResultSet rs  = ps.executeQuery();
+									while(rs.next()){
+							%>
 							<tr>
 								<td></td>
 								<td>
-									<%PreparedStatement ps2 = con1.prepareStatement("select * from coursedetails where id = ?");
-										ps2.setInt(1, rs.getInt("courseid"));
-										ResultSet rs2 = ps2.executeQuery();
-										if(rs2.next()){
-									%>
-								
-								<%=rs2.getString("Name") %>
-								<%} %>
+									<%
+										PreparedStatement ps2 = con1.prepareStatement("select * from coursedetails where id = ?");
+																	ps2.setInt(1, rs.getInt("courseid"));
+																	ResultSet rs2 = ps2.executeQuery();
+																	if(rs2.next()){
+									%> <%=rs2.getString("Name")%> <%
+ 	}
+ %>
 								</td>
-								<td><%=rs.getInt("fees") %></td>
+								<td><%=rs.getInt("fees")%></td>
 								<td>
-							<%
-						
-						
-								int batid =rs.getInt("batchid");
-																	if(batid==0){
-							%> <a href="#assigntobfm" data-toggle="modal">Assign to Batch</a>
-							<%
-								}else{
-							 						out.print("Assigned to batch :"+batid);
-							 					}
-							
-							%>
-								
+									<%
+										int batid =rs.getInt("batchid");
+																								if(batid==0){
+									%> <a href="#assigntobfm" data-toggle="modal">Assign to Batch</a>
+									<%
+										}else{
+														 						out.print("Assigned to batch :"+batid);
+														 					}
+									%>
+
 								</td>
 							</tr>
-				<%}	 %>		
-						
+							<%
+								}
+							%>
+
 						</tbody>
-						</table>
-						</section>
-					
-						
-						
-						
-				
-				
-				
-				
-				
+					</table>
+				</section>
+
+
+
+
+
+
+
+
+
 			</aside>
 		</div>
 	</section>
-<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+	<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
 		tabindex="-1" id="assigncourse" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -492,25 +466,26 @@ if(rs1.next()){
 					<form class="form-horizontal" id="newcourse" role="form"
 						data-validate="parsley">
 						<div class="form-group">
-							<label for="amount">Course Name</label>
-							<select name = "cname"  class="form-control" id = "cname" >
-							<%PreparedStatement ps1 = con1.prepareStatement("select * from coursedetails");
-									ResultSet rs2 = ps1.executeQuery();
-									while(rs2.next()){
-									%>
-									<option value = "<%= rs2.getInt("id")%>"><%= rs2.getString("Name")%></option>
-									<%} %>
-							
+							<label for="amount">Course Name</label> <select name="cname"
+								class="form-control" id="cname">
+								<%
+									PreparedStatement ps1 = con1.prepareStatement("select * from coursedetails");
+															ResultSet rs2 = ps1.executeQuery();
+															while(rs2.next()){
+								%>
+								<option value="<%=rs2.getInt("id")%>"><%=rs2.getString("Name")%></option>
+								<%
+									}
+								%>
+
 							</select>
 						</div>
-						<div class="form-group">	
-							<label for="paymode">Fees</label> 
-						 <input type="text"
-								class="form-control" id="fees" name="fees"
-								placeholder="Fees" data-required="true"
-								data-range="[0,1000000]" data-type="number">
+						<div class="form-group">
+							<label for="paymode">Fees</label> <input type="text"
+								class="form-control" id="fees" name="fees" placeholder="Fees"
+								data-required="true" data-range="[0,1000000]" data-type="number">
 						</div>
-					<input type= "hidden" name = "sid" value ="<%=stuid%>"/>
+						<input type="hidden" name="sid" value="<%=stuid%>" />
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
 								<button type="submit" class="btn btn-default">Save</button>
@@ -547,21 +522,22 @@ if(rs1.next()){
 								<option value="">---select----</option>
 								<%
 									Connection con13 = DbConnection.getConnection();
-																						Statement s13 = con13.createStatement();
-																						ResultSet rs13 = s13
-																								.executeQuery("SELECT * FROM `batchdetails` ORDER BY `id`");
-																						while (rs13.next()) {
+																												Statement s13 = con13.createStatement();
+																												ResultSet rs13 = s13
+																														.executeQuery("SELECT * FROM `batchdetails` ORDER BY `id`");
+																												while (rs13.next()) {
 								%>
 								<option value="<%=rs13.getString(1)%>"><%=rs13.getString(1)%>
 									-
-									<%PreparedStatement ps0 = con1.prepareStatement("select * from coursedetails where id = ?");
-									ps0.setInt(1, rs13.getInt("id"));
-									ResultSet rs0 = ps0.executeQuery();
-									if(rs0.next()){
-									%>
-									<%=rs0.getString("Name") %>
 									<%
-									}
+									PreparedStatement ps0 = con1.prepareStatement("select * from coursedetails where id = ?");
+															ps0.setInt(1, rs13.getInt("id"));
+															ResultSet rs0 = ps0.executeQuery();
+															if(rs0.next()){
+								%>
+									<%=rs0.getString("Name")%>
+									<%
+										}
 									%>
 									-
 									<%=rs13.getString(10)%></option>
@@ -574,31 +550,31 @@ if(rs1.next()){
 							<label for="course">Course</label> <select id="batchid"
 								name="cid" class="form-control" data-required="true"
 								data-notblank="true">
-								
-								<%PreparedStatement ps5 = con1.prepareStatement("select * from studentcourse where studid = ? and batchid = ?");
-									ps5.setInt(1, Integer.parseInt(stuid));
-									ps5.setInt(2, 0);
-									ResultSet rs5 = ps5.executeQuery();
-									while(rs5.next()){
-										PreparedStatement ps6 = con1.prepareStatement("select * from coursedetails where id = ?");
-										ps6.setInt(1, rs5.getInt("courseid"));
-										ResultSet rs6 = ps6.executeQuery();
-										if(rs6.next()){
-											%>
-											
-											<option value = "<%= rs5.getInt("courseid")%>"><%= rs6.getString("Name")%></option>
-											
-											<%
-											
-										}
-										
+
+								<%
+									PreparedStatement ps5 = con1.prepareStatement("select * from studentcourse where studid = ? and batchid = ?");
+															ps5.setInt(1, Integer.parseInt(stuid));
+															ps5.setInt(2, 0);
+															ResultSet rs5 = ps5.executeQuery();
+															while(rs5.next()){
+																PreparedStatement ps6 = con1.prepareStatement("select * from coursedetails where id = ?");
+																ps6.setInt(1, rs5.getInt("courseid"));
+																ResultSet rs6 = ps6.executeQuery();
+																if(rs6.next()){
+								%>
+
+								<option value="<%=rs5.getInt("courseid")%>"><%=rs6.getString("Name")%></option>
+
+								<%
 									}
-									%>
-								
-								</select>
-								</div>
-						
-						
+																
+															}
+								%>
+
+							</select>
+						</div>
+
+
 						<input type="hidden" name="stid" value="<%=stuid%>">
 						<div class="form-group">
 							<div class="col-lg-offset-2 col-lg-10">
@@ -629,22 +605,24 @@ if(rs1.next()){
 					<form class="form-horizontal" id="newpayment" role="form"
 						data-validate="parsley">
 						<div class="form-group">
-							<label for="amount">Towards</label>
-							 <select 	class="form-control" id="towards" name="towards"
-							data-required="true">
-								
-							<%PreparedStatement ps3 = con1.prepareStatement("select * from studentcourse where studid =?");
-									ps3.setInt(1, Integer.parseInt(stuid));
-									ResultSet rs3 = ps3.executeQuery();
-									while(rs3.next()){
-										PreparedStatement ps4 = con1.prepareStatement("select * from coursedetails where id = ?");
-										ps4.setInt(1, rs3.getInt("courseid"));
-										ResultSet rs4 = ps4.executeQuery();
-										if(rs4.next()){
-									%>
-								<option value="<%= rs3.getInt("courseid")%>"><%=rs4.getString("Name") %></option>
-								<%}
-										}%>
+							<label for="amount">Towards</label> <select class="form-control"
+								id="towards" name="towards" data-required="true">
+
+								<%
+									PreparedStatement ps3 = con1.prepareStatement("select * from studentcourse where studid =?");
+															ps3.setInt(1, Integer.parseInt(stuid));
+															ResultSet rs3 = ps3.executeQuery();
+															while(rs3.next()){
+																PreparedStatement ps4 = con1.prepareStatement("select * from coursedetails where id = ?");
+																ps4.setInt(1, rs3.getInt("courseid"));
+																ResultSet rs4 = ps4.executeQuery();
+																if(rs4.next()){
+								%>
+								<option value="<%=rs3.getInt("courseid")%>"><%=rs4.getString("Name")%></option>
+								<%
+									}
+																}
+								%>
 							</select>
 						</div>
 						<div class="form-group">
@@ -662,6 +640,44 @@ if(rs1.next()){
 								<option value="CHEQUE">CHEQUE</option>
 								<option value="CARD">CARD</option>
 							</select>
+						</div>
+						<div id="cheque" style="display: none;">
+							<div class="form-group">
+								<label>Cheque Number</label> <input type="text"
+									placeholder="Cheque Number" id="cno" name = "cno" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>Cheque Date</label> 
+								 <input type="text"
+								id="cdate" class="form-control datepicker"
+								name="cdate" placeholder="Cheque Date"
+								data-type="dateIso" readonly>
+							</div>
+							<div class="form-group">
+								<label>Bank</label> <input type="text" placeholder="Bank"
+									id="cbank" name="cbank" class="form-control">
+							</div>
+
+							<div class="form-group">
+								<label>Branch</label> <input type="text" id="cbranch" name="cbranch"
+									placeholder="Branch" class="form-control">
+							</div>
+						</div>
+						<div id="card" style="display: none;">
+							<div class="form-group">
+								<label>Card Type</label> <select class="form-control" id="ctype" 
+									name="ctype">
+
+									<option value="Credit">CREDIT</option>
+									<option value="Debit">DEBIT</option>
+
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Bank Name</label> <input type="text" placeholder="Bank Name"
+									id="cardbank" name="cardbank" class="form-control">
+							</div>
+
 						</div>
 						<div class="form-group">
 							<label for="nextduedate">Next Due date</label> <input type="text"
@@ -682,95 +698,135 @@ if(rs1.next()){
 			</div>
 		</div>
 	</div>
-	
-	<%con1.close(); %>
+
+	<%
+		con1.close();
+	%>
 	<script type="text/javascript">
 	
 		$(document).ready(function() {
 		
+			$("#paymode").change(function(){
+				if($('#paymode :selected').text()=="CHEQUE"){
+					$("#card").hide();
+					$("#cheque").show(1000);
+				}else if($('#paymode :selected').text()=="CARD"){
+					$("#cheque").hide();
+					$("#card").show(1000);
+				}else{
+					$("#cheque").hide();
+					$("#card").hide();
+				}
+			});
+			
+			
 			$("#newcourse").submit(function() {
 			
 			$("#newcourse").parsley('validate');
 			var str = $(this).serialize();
 			$.ajax({
-				url : "<%= request.getContextPath()%>/Ajax/adstudentcourse.jsp",
-				type : "GET",
-				data : str,
-				success : function(data, textStatus, jqXHR) {
-					if (data == 1) {
-						$.gritter.add({
-							title : 'Success',
-							text : 'New Course Added'
+				url : "<%=request.getContextPath()%>/Ajax/adstudentcourse.jsp",
+															type : "GET",
+															data : str,
+															success : function(
+																	data,
+																	textStatus,
+																	jqXHR) {
+																if (data == 1) {
+																	$.gritter
+																			.add({
+																				title : 'Success',
+																				text : 'New Course Added'
+																			});
+																	window.location
+																			.reload();
+																} else {
+																	$.gritter
+																			.add({
+																				title : 'Sorry',
+																				text : 'Some Error Occured, Please Try Again.'
+																			});
+																}
+															},
+															error : function(
+																	jqXHR,
+																	textStatus,
+																	errorThrown) {
+																alert("Sorry, Error.");
+																$.gritter
+																		.add({
+																			title : 'Sorry',
+																			text : 'Some Error Occured, Please Try Again.'
+																		});
+
+															}
+														});
+												return false;
+
+											});
+							$("#newpayment")
+									.submit(
+											function() {
+
+												$('#newpayment').parsley(
+														'validate');
+
+												if ($('#newpayment').parsley(
+														'isValid')) {
+
+												} else {
+													$.gritter
+															.add({
+																title : 'Fill Fields',
+																text : 'Oops Please Fill All Fields'
+															});
+													return false;
+												}
+
+												var str = $(this).serialize();
+
+												$
+														.ajax({
+															url : "../Ajax/newPayment.jsp",
+															type : "GET",
+															data : str,
+															success : function(
+																	data,
+																	textStatus,
+																	jqXHR) {
+																if (data == 1) {
+																	$.gritter
+																			.add({
+																				title : 'Success',
+																				text : 'All new Payment Added'
+																			});
+																	window.location
+																			.reload();
+																} else {
+																	$.gritter
+																			.add({
+																				title : 'Sorry',
+																				text : 'Some Error Occured, Please Try Again.'
+																			});
+																}
+															},
+															error : function(
+																	jqXHR,
+																	textStatus,
+																	errorThrown) {
+																alert("Sorry, Error.");
+																$.gritter
+																		.add({
+																			title : 'Sorry',
+																			text : 'Some Error Occured, Please Try Again.'
+																		});
+
+															}
+														});
+												return false;
+
+											});
 						});
-						window.location.reload();
-					} else {
-						$.gritter.add({
-							title : 'Sorry',
-							text : 'Some Error Occured, Please Try Again.'
-						});
-					}
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert("Sorry, Error.");
-					$.gritter.add({
-						title : 'Sorry',
-						text : 'Some Error Occured, Please Try Again.'
-					});
-
-				}
-			});
-			return false;
-			
-			});
-			$("#newpayment").submit(function() {
-	
-			
-				
-				$('#newpayment').parsley('validate');
-
-				if ($('#newpayment').parsley('isValid')) {
-
-				} else {
-					$.gritter.add({
-						title : 'Fill Fields',
-						text : 'Oops Please Fill All Fields'
-					});
-					return false;
-				}
-
-				var str = $(this).serialize();
-
-				$.ajax({
-					url : "../Ajax/newPayment.jsp",
-					type : "GET",
-					data : str,
-					success : function(data, textStatus, jqXHR) {
-						if (data == 1) {
-							$.gritter.add({
-								title : 'Success',
-								text : 'All new Payment Added'
-							});
-							window.location.reload();
-						} else {
-							$.gritter.add({
-								title : 'Sorry',
-								text : 'Some Error Occured, Please Try Again.'
-							});
-						}
-					},
-					error : function(jqXHR, textStatus, errorThrown) {
-						alert("Sorry, Error.");
-						$.gritter.add({
-							title : 'Sorry',
-							text : 'Some Error Occured, Please Try Again.'
-						});
-
-					}
-				});
-				return false;
-
-			});
-		});
 	</script>
 	<!-- page end-->
 </section>
