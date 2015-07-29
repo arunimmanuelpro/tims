@@ -1,15 +1,15 @@
 package mailing;
 
-import general.GetInfoAbout;
-
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.Flags;
+import javax.mail.Flags.Flag;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -25,14 +26,11 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
-import javax.mail.Flags.Flag;
-import javax.mail.internet.InternetAddress;
 import javax.mail.search.FlagTerm;
 
 import access.DbConnection;
 
 import com.sun.mail.util.MailSSLSocketFactory;
-
 public class ReadJustDial {
 	Properties properties = null;
 	private Session session = null;
@@ -74,7 +72,7 @@ public class ReadJustDial {
 						return new PasswordAuthentication(userName, password);
 					}
 				});
-		Connection con = DbConnection.getConnection();
+	Connection con = DbConnection.getConnection();
 		try {
 			store = session.getStore("imaps");
 			store.connect();
@@ -87,66 +85,34 @@ public class ReadJustDial {
 			for (int i = 0; i < messages.length; i++) {
 				Message message = messages[i];
 				Address[] from = message.getFrom();
-				System.out.println("-------------------------------");
-				// System.out.println("Date : " + message.getSentDate());
-				// System.out.println("From : " + from[0]);
-				// System.out.println("Subject: " + message.getSubject());
-				// System.out.println("Content :");
+
 
 				int msgno = message.getMessageNumber();
 
-				boolean already_read = false;
-				boolean ignore = false;
-
-				
-				Statement s = con.createStatement();
-				String checksql = "SELECT * FROM `enquiry` WHERE `source`='JUSTDIAL' AND `mailid`='"
-						+ msgno + "' ";
-				ResultSet rs2 = s.executeQuery(checksql);
-				if (rs2.next()) {
-					already_read = true;
-				}
-
-				if (!already_read) {
-
-					String email = from == null ? null
-							: ((InternetAddress) from[0]).getAddress();
-
-					if (email.equalsIgnoreCase("chnfeedback@justdial.com")) {
-						System.out.println("JUSTDIAL Mail :" + email);
-					} else {
-
-						System.out.println("Not a JUSTDIAL Mail Ignored :"
-								+ email);
-						ignore = true;
-					}
-				} else {
-					System.out.println("Mail Already Read. Ignored");
-					message.setFlag(Flags.Flag.SEEN, true);
-					ignore = true;
-
-				}
-
-				ArrayList<String> details4 = new ArrayList<String>();
-				if (!ignore) {
-
-					gotdata = false;
 					try {
 						Object content = message.getContent();
-						// check for string
-						// then check for multipart
+					
 						if (content instanceof String) {
 							content = ((String) content).replaceAll(
 									"(\r\n|\n)", "<br>");
 							CharSequence c = (CharSequence) content;
-							// System.out.println(c);
-							// Pattern pattern = Pattern.compile(":(.*?)<br>");
-							// Matcher matcher = pattern.matcher(c);
-							// while(matcher.find()){
-							// details4.add(matcher.group(1));
-							// System.out.println("Matcher :"+matcher.group(1));
-							// }
-
+							String conn =content.toString();
+							
+						String [] contentarray =conn.split("\n");
+						/*for(int ij = 0;ij<contentarray.length;ij++){
+							System.out.println(contentarray[ij]);
+						}*/
+						PreparedStatement ps = con.prepareStatement("insert into enquiry(source,name,email,mobile,currentlyin,status)values(?,?,?,?,?,?)");
+						ps.setString(1, "JUST DIAL");
+						ps.setString(2, contentarray[0]);	
+						ps.setString(3, contentarray[6]);
+						ps.setString(4, contentarray[5]);
+						ps.setString(5, contentarray[4]);
+						ps.setString(6, "NEW");
+					System.out.println(ps);
+						ps.executeUpdate();
+						
+						
 						}
 						if (content instanceof Multipart) {
 							Multipart multiPart = (Multipart) content;
@@ -158,161 +124,76 @@ public class ReadJustDial {
 						e.printStackTrace();
 					}
 
-				}
-
-				boolean gotyet5 = false;
+			
 
 				ArrayList<String> details2 = new ArrayList<String>();
-				if (parsedcontent != null && !already_read) {
+				if (parsedcontent != null ) {
 					if (parsedcontent.length() > 0) {
 						Pattern pattern = Pattern
 								.compile("<td valign=\"top\">(.*?)</td>");
 						Matcher matcher = pattern.matcher(parsedcontent);
-
+						List<String> maillist = new LinkedList<String>();
 						while (matcher.find()) {
-							details2.add(matcher.group(1));
+						maillist.add(matcher.group(1));
 						
-							gotdata = false;
+						
 						}
+						System.out.println(maillist);
+						PreparedStatement ps = con.prepareStatement("insert into enquiry(source,name,courseinterested,currentlyin,email,mobile,status,donebyid,date,month,year)values(?,?,?,?,?,?,?,?,?,?,?)");
+						ps.setString(1, "JUST DIAL");
+						if(maillist.size()>=0+1){
+						ps.setString(2, maillist.get(0));
+						}else{
+							ps.setString(2, null);
+						}
+						if(maillist.size()>=1+1){
+							ps.setString(3, maillist.get(1));
+							}else{
+								ps.setString(3, null);
+							}
+						if(maillist.size()>=3+1){
+							ps.setString(4, maillist.get(3));
+							}else{
+								ps.setString(4, null);
+							}
+						if(maillist.size()>=6+1){
+							ps.setString(5, maillist.get(6));
+							}else{
+								ps.setString(5, null);
+							}
+						
+						
+						if(maillist.size()>=5+1){
+							ps.setString(6, maillist.get(5));
+							}else{
+								ps.setString(6, null);
+							}
+						ps.setString(7, "NEW");
+						ps.setInt(8, 0);
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+						Date date = new Date();
+						ps.setString(9, dateFormat.format(date));
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(date);
+						ps.setString(10, String.valueOf(cal.get(Calendar.MONTH)+1));
+						ps.setString(11, String.valueOf(cal.get(Calendar.YEAR)));
+					
+						ps.executeUpdate();
 					} else {
 						System.out.println("Sorry No Data Found");
 					}
 				}
 
-				if ((details2.size() > 0) && !already_read) {
-					try {
-
-						SimpleDateFormat ddmm = new SimpleDateFormat(
-								"yyyy-MM-dd");
-						SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");
-						Calendar calender = Calendar.getInstance();
-						Date currentdate = new Date();
-						calender.setTime(currentdate);
-						int month = calender.get(Calendar.MONTH) + 1;
-						String cDate = ddmm.format(currentdate);
-						String year = yyyy.format(currentdate);
-
-						s = con.createStatement();
-
-						String sql = "";
-
-						if (details2.size() == 4) {
-							String mobilen = details2.get(1);
-							sql = "INSERT INTO `enquiry`(`source`, `name`, `email`, `mobile`, `qualification`, `stream`, `currentlyin`, `homephone`, `courseinterested`, `address`,`donebyid`,`date`,`month`,`year`,`status`,`mailid`) VALUES ('JUSTDIAL','"
-									+ details2.get(0)
-									+ "','','"
-									+ mobilen
-									+ "','','','','','','"
-									+ details2.get(3)
-									+ "','0','"
-									+ cDate
-									+ "','"
-									+ month
-									+ "','"
-									+ year + "','NEW','" + msgno + "')";
-						} else if (details2.size() == 5) {
-							String mobilen = details2.get(2);
-							sql = "INSERT INTO `enquiry`(`source`, `name`, `email`, `mobile`, `qualification`, `stream`, `currentlyin`, `homephone`, `courseinterested`, `address`,`donebyid`,`date`,`month`,`year`,`status`,`mailid`) VALUES ('JUSTDIAL','"
-									+ details2.get(0)
-									+ "','','"
-									+ mobilen
-									+ "','','','','','','"
-									+ details2.get(4).replace("'", "\\'")
-									+ "','0','"
-									+ cDate
-									+ "','"
-									+ month
-									+ "','"
-									+ year + "','NEW','" + msgno + "')";
-						}
-
-						// System.out.println(sql);
-						s.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-						ResultSet rs = s.getGeneratedKeys();
-						if (rs.next()) {
-							// Retrieve the auto generated key(s).
-							int key = rs.getInt(1);
-
-							sql = "INSERT INTO `enquiry_data`(`enquiry_id`, `followon`) VALUES ('"
-									+ key + "','" + cDate + "')";
-							s.executeUpdate(sql);
-
-							ArrayList<String> users = GetInfoAbout
-									.getuserswithrole("4");
-							SimpleDateFormat ddm = new SimpleDateFormat(
-									"yyyy-MM-dd HH:mm:ss");
-							Date cdd = new Date();
-							String cDatet = ddm.format(cdd);
-							for (String tuser : users) {
-								int userid = Integer.parseInt(tuser);
-								sql = "INSERT INTO `notifications`(`msg`, `read` , `userid`,`ReceivedAt`) VALUES ('NEW ENQUIRY from JUSTDIAL :"
-										+ details2.get(0)
-										+ "',0,'"
-										+ userid
-										+ "','" + cDatet + "')";
-								s.executeUpdate(sql);
-							}
-							gotyet5 = true;
-
-						} else {
-							// Actual End
-						}
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				} else {
-					System.out.println("Sorry No Data Found");
-				}
-
-				if (gotyet5) {
-					// Set Message as Read
-
-					message.setFlag(Flag.FLAGGED, true);
-
-					inbox.setFlags(new Message[] { messages[i] }, new Flags(
-							Flags.Flag.SEEN), true);
-
-					System.out.println("JUSTDIAL Mail Details Read Successful");
-				} else {
-					System.out.println("JUSTDIAL Mail Details Read Failed");
-					// Set Message as Read
-					inbox.setFlags(new Message[] { messages[i] }, new Flags(
-							Flags.Flag.SEEN), false);
-				}
-
-				if (gotdata) {
-					int detailcount = 0;
-					for (String s3 : details2) {
-						System.out.println("Detail : " + s3);
-						detailcount++;
-					}
-					if (detailcount == 5) {
-						// Set Message as Read
-						System.out.println("Mail Details Read Successfully");
-						message.setFlag(Flag.FLAGGED, true);
-					} else {
-						System.out.println("Mail Details Read Failed");
-						// Set Message as Read
-						message.setFlag(Flag.FLAGGED, false);
-					}
-				} else {
-					message.setFlag(Flag.FLAGGED, false);
-				}
-
-				System.out.println("--------------------------------");
-
-			}
+			}	
 			inbox.close(true);
 			store.close();
 		} catch (NoSuchProviderException e) {
 			e.printStackTrace();
 		} catch (MessagingException e) {
 			e.printStackTrace();
+		
 		}finally{
-			if(con!=null){
-				con.close();
-			}
+			con.close();
 		}
 		store.close();
 	}
