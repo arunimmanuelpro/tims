@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%
@@ -127,8 +128,16 @@
 													Interested</label>
 												<div class="col-lg-8">
 												<select name = "courseinterestedin"  id = "courseinterestedin" class = "form-control">
-													<option value = "Code Java" >Core Java</option>
-													<option value=  "Android" >Android</option>
+												<%Connection con = DbConnection.getConnection();
+													PreparedStatement ps = con.prepareStatement("select * from coursedetails order by Name");
+													ResultSet rs = ps.executeQuery();
+													while(rs.next()){
+												%>
+													<option value = "<%= rs.getString("Name")%>" ><%= rs.getString("Name")%></option>
+													
+													<%}
+													con.close();
+													%>
 													<option value=  "Other">Other</option>
 												
 												</select>
@@ -252,6 +261,18 @@
 		</script>
 <script>
 $(document).ready(function(){
+	
+	$("#courseinterestedin")
+	.change(
+			function() {
+
+				if ($("#courseinterestedin")
+						.val() == "Other") {
+					$("#other").show();
+				} else {
+					$("#other").hide();
+				}
+			});
 	//Contact Details Update Start
 	$("#newempdetadd")
 			.submit(

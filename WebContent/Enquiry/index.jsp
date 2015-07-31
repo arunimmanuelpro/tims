@@ -82,7 +82,7 @@
 
 			</div>
 		</div>
-		<script type="text/javascript">
+	<script type="text/javascript">
 			$(document)
 					.ready(
 							function() {
@@ -146,6 +146,7 @@
 										}
 
 									}
+									
 									<%if(request.getParameter("completed")!=null){%>
 									xmlhttp.open("GET", "enqcompletedtable.jsp", true);
 									
@@ -169,6 +170,7 @@
 		
 							});
 		</script>
+
 	</section>
 </section>
 <!--main content end-->
