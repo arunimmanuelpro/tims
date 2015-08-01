@@ -183,12 +183,12 @@ if(rs1.next()){
 							<div class="bio-row">
 								<span> <span>Payment Status</span>: <%
  	if(bal==0 && (totalfees!=0)){
- 																out.print("<b class='text-success'>Payment Cleared</b>");
- 															}else if(bal>0){
- 																out.print("<b class='text-warning'>Payment Pending</b>");
- 															}else if(totalfees==0 && bal==0){
- 																out.print("<b class='text-success'>Fees not discussed</b>");
- 															}
+  																out.print("<b class='text-success'>Payment Cleared</b>");
+  															}else if(bal>0){
+  																out.print("<b class='text-warning'>Payment Pending</b>");
+  															}else if(totalfees==0 && bal==0){
+  																out.print("<b class='text-success'>Fees not discussed</b>");
+  															}
  %>
 								</span>
 							</div>
@@ -228,7 +228,7 @@ if(rs1.next()){
 						<tbody>
 							<%
 								if(bookdetails!=null){
-													while (bookdetails.next()) {
+																		while (bookdetails.next()) {
 							%>
 							<tr>
 								<td><%=(bookdetails.getString(1)==null?"":bookdetails.getString(1))%></td>
@@ -238,10 +238,10 @@ if(rs1.next()){
 								<td>
 									<%
 										boolean delivered = true;
-																													Statement sbook = con1.createStatement();
-																													String bsql = "SELECT * FROM `student_books` WHERE `bookid`='"+bookdetails.getString(1)+"' AND `studentid`='"+stuid+"' LIMIT 1";
-																													ResultSet rsb = sbook.executeQuery(bsql);
-																													if(rsb.next()) out.print("DELIVERED"); else{ out.print("PENDING"); delivered = false;}
+																																				Statement sbook = con1.createStatement();
+																																				String bsql = "SELECT * FROM `student_books` WHERE `bookid`='"+bookdetails.getString(1)+"' AND `studentid`='"+stuid+"' LIMIT 1";
+																																				ResultSet rsb = sbook.executeQuery(bsql);
+																																				if(rsb.next()) out.print("DELIVERED"); else{ out.print("PENDING"); delivered = false;}
 									%>
 								</td>
 								<td>
@@ -257,7 +257,7 @@ if(rs1.next()){
 							</tr>
 							<%
 								}
-												}
+																	}
 							%>
 						</tbody>
 					</table>
@@ -292,7 +292,7 @@ if(rs1.next()){
 						<tbody>
 							<%
 								if(certdetails!=null){
-													while (certdetails.next()) {
+																		while (certdetails.next()) {
 							%>
 							<tr>
 								<td><%=(certdetails.getString(1)==null?"":certdetails.getString(1))%></td>
@@ -301,10 +301,10 @@ if(rs1.next()){
 								<td>
 									<%
 										boolean delivered = true;
-																													Statement sbook = con1.createStatement();
-																													String bsql = "SELECT * FROM `students_certificate` WHERE `certificateid`='"+certdetails.getString(1)+"' AND `studentid`='"+stuid+"' LIMIT 1";
-																													ResultSet rsb = sbook.executeQuery(bsql);
-																													if(rsb.next()) out.print("DELIVERED"); else{ out.print("PENDING"); delivered = false;}
+																																				Statement sbook = con1.createStatement();
+																																				String bsql = "SELECT * FROM `students_certificate` WHERE `certificateid`='"+certdetails.getString(1)+"' AND `studentid`='"+stuid+"' LIMIT 1";
+																																				ResultSet rsb = sbook.executeQuery(bsql);
+																																				if(rsb.next()) out.print("DELIVERED"); else{ out.print("PENDING"); delivered = false;}
 									%>
 								</td>
 								<td>
@@ -319,7 +319,7 @@ if(rs1.next()){
 							</tr>
 							<%
 								}
-												}
+																	}
 							%>
 						</tbody>
 					</table>
@@ -355,8 +355,8 @@ if(rs1.next()){
 						<tbody>
 							<%
 								Statement s3 = con1.createStatement();
-																							paymentdetails = s3.executeQuery(sql3);
-																							while (paymentdetails.next()) {
+																												paymentdetails = s3.executeQuery(sql3);
+																												while (paymentdetails.next()) {
 							%>
 							<tr>
 								<td><%=(paymentdetails.getString(1)==null?"":paymentdetails.getString(1))%></td>
@@ -403,18 +403,18 @@ if(rs1.next()){
 						<tbody>
 							<%
 								PreparedStatement ps = con1.prepareStatement("select * from studentcourse where studid = ?");
-									ps.setInt(1, Integer.parseInt(stuid));
-									ResultSet rs  = ps.executeQuery();
-									while(rs.next()){
+														ps.setInt(1, Integer.parseInt(stuid));
+														ResultSet rs  = ps.executeQuery();
+														while(rs.next()){
 							%>
 							<tr>
 								<td></td>
 								<td>
 									<%
 										PreparedStatement ps2 = con1.prepareStatement("select * from coursedetails where id = ?");
-																	ps2.setInt(1, rs.getInt("courseid"));
-																	ResultSet rs2 = ps2.executeQuery();
-																	if(rs2.next()){
+																								ps2.setInt(1, rs.getInt("courseid"));
+																								ResultSet rs2 = ps2.executeQuery();
+																								if(rs2.next()){
 									%> <%=rs2.getString("Name")%> <%
  	}
  %>
@@ -423,13 +423,13 @@ if(rs1.next()){
 								<td>
 									<%
 										int batid =rs.getInt("batchid");
-																								if(batid==0){
-									%> <a href="#assigntobfm" data-toggle="modal">Assign to Batch</a>
-									<%
-										}else{
-														 						out.print("Assigned to batch :"+batid);
-														 					}
-									%>
+																															if(batid==0){
+									%> <a href="#assigntobfm" data-toggle="modal">Assign to
+										Batch</a> <%
+ 	}else{
+ 												 						out.print("Assigned to batch :"+batid);
+ 												 					}
+ %>
 
 								</td>
 							</tr>
@@ -470,8 +470,8 @@ if(rs1.next()){
 								class="form-control" id="cname">
 								<%
 									PreparedStatement ps1 = con1.prepareStatement("select * from coursedetails");
-															ResultSet rs2 = ps1.executeQuery();
-															while(rs2.next()){
+																					ResultSet rs2 = ps1.executeQuery();
+																					while(rs2.next()){
 								%>
 								<option value="<%=rs2.getInt("id")%>"><%=rs2.getString("Name")%></option>
 								<%
@@ -522,18 +522,18 @@ if(rs1.next()){
 								<option value="">---select----</option>
 								<%
 									Connection con13 = DbConnection.getConnection();
-																												Statement s13 = con13.createStatement();
-																												ResultSet rs13 = s13
-																														.executeQuery("SELECT * FROM `batchdetails` ORDER BY `id`");
-																												while (rs13.next()) {
+																																		Statement s13 = con13.createStatement();
+																																		ResultSet rs13 = s13
+																																				.executeQuery("SELECT * FROM `batchdetails` ORDER BY `id`");
+																																		while (rs13.next()) {
 								%>
 								<option value="<%=rs13.getString(1)%>"><%=rs13.getString(1)%>
 									-
 									<%
 									PreparedStatement ps0 = con1.prepareStatement("select * from coursedetails where id = ?");
-															ps0.setInt(1, rs13.getInt("id"));
-															ResultSet rs0 = ps0.executeQuery();
-															if(rs0.next()){
+																					ps0.setInt(1, rs13.getInt("id"));
+																					ResultSet rs0 = ps0.executeQuery();
+																					if(rs0.next()){
 								%>
 									<%=rs0.getString("Name")%>
 									<%
@@ -553,22 +553,22 @@ if(rs1.next()){
 
 								<%
 									PreparedStatement ps5 = con1.prepareStatement("select * from studentcourse where studid = ? and batchid = ?");
-															ps5.setInt(1, Integer.parseInt(stuid));
-															ps5.setInt(2, 0);
-															ResultSet rs5 = ps5.executeQuery();
-															while(rs5.next()){
-																PreparedStatement ps6 = con1.prepareStatement("select * from coursedetails where id = ?");
-																ps6.setInt(1, rs5.getInt("courseid"));
-																ResultSet rs6 = ps6.executeQuery();
-																if(rs6.next()){
+																					ps5.setInt(1, Integer.parseInt(stuid));
+																					ps5.setInt(2, 0);
+																					ResultSet rs5 = ps5.executeQuery();
+																					while(rs5.next()){
+																						PreparedStatement ps6 = con1.prepareStatement("select * from coursedetails where id = ?");
+																						ps6.setInt(1, rs5.getInt("courseid"));
+																						ResultSet rs6 = ps6.executeQuery();
+																						if(rs6.next()){
 								%>
 
 								<option value="<%=rs5.getInt("courseid")%>"><%=rs6.getString("Name")%></option>
 
 								<%
 									}
-																
-															}
+																						
+																					}
 								%>
 
 							</select>
@@ -610,18 +610,18 @@ if(rs1.next()){
 
 								<%
 									PreparedStatement ps3 = con1.prepareStatement("select * from studentcourse where studid =?");
-															ps3.setInt(1, Integer.parseInt(stuid));
-															ResultSet rs3 = ps3.executeQuery();
-															while(rs3.next()){
-																PreparedStatement ps4 = con1.prepareStatement("select * from coursedetails where id = ?");
-																ps4.setInt(1, rs3.getInt("courseid"));
-																ResultSet rs4 = ps4.executeQuery();
-																if(rs4.next()){
+																					ps3.setInt(1, Integer.parseInt(stuid));
+																					ResultSet rs3 = ps3.executeQuery();
+																					while(rs3.next()){
+																						PreparedStatement ps4 = con1.prepareStatement("select * from coursedetails where id = ?");
+																						ps4.setInt(1, rs3.getInt("courseid"));
+																						ResultSet rs4 = ps4.executeQuery();
+																						if(rs4.next()){
 								%>
 								<option value="<%=rs3.getInt("courseid")%>"><%=rs4.getString("Name")%></option>
 								<%
 									}
-																}
+																						}
 								%>
 							</select>
 						</div>
@@ -644,14 +644,13 @@ if(rs1.next()){
 						<div id="cheque" style="display: none;">
 							<div class="form-group">
 								<label>Cheque Number</label> <input type="text"
-									placeholder="Cheque Number" id="cno" name = "cno" class="form-control">
+									placeholder="Cheque Number" id="cno" name="cno"
+									class="form-control">
 							</div>
 							<div class="form-group">
-								<label>Cheque Date</label> 
-								 <input type="text"
-								id="cdate" class="form-control datepicker"
-								name="cdate" placeholder="Cheque Date"
-								data-type="dateIso" readonly>
+								<label>Cheque Date</label> <input type="text" id="cdate"
+									class="form-control datepicker" name="cdate"
+									placeholder="Cheque Date" data-type="dateIso" readonly>
 							</div>
 							<div class="form-group">
 								<label>Bank</label> <input type="text" placeholder="Bank"
@@ -659,13 +658,13 @@ if(rs1.next()){
 							</div>
 
 							<div class="form-group">
-								<label>Branch</label> <input type="text" id="cbranch" name="cbranch"
-									placeholder="Branch" class="form-control">
+								<label>Branch</label> <input type="text" id="cbranch"
+									name="cbranch" placeholder="Branch" class="form-control">
 							</div>
 						</div>
 						<div id="card" style="display: none;">
 							<div class="form-group">
-								<label>Card Type</label> <select class="form-control" id="ctype" 
+								<label>Card Type</label> <select class="form-control" id="ctype"
 									name="ctype">
 
 									<option value="Credit">CREDIT</option>
@@ -674,8 +673,9 @@ if(rs1.next()){
 								</select>
 							</div>
 							<div class="form-group">
-								<label>Bank Name</label> <input type="text" placeholder="Bank Name"
-									id="cardbank" name="cardbank" class="form-control">
+								<label>Bank Name</label> <input type="text"
+									placeholder="Bank Name" id="cardbank" name="cardbank"
+									class="form-control">
 							</div>
 
 						</div>

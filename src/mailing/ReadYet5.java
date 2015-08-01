@@ -3,6 +3,7 @@ package mailing;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,15 +36,21 @@ public class ReadYet5 {
 	private Store store = null;
 	private Folder inbox = null;
 	boolean gotdata = false;
-	private String userName = "yet5@eyeopentechnologies.com";// provide user
+	private String userName;// provide user
 																// name
-	private String password = "WinWin1940";// provide password
+	private String password;// provide password
 
 	public ReadYet5() {
 	}
 
 	public void readMails() throws IOException, Exception {
 		Connection con = DbConnection.getConnection();
+		PreparedStatement ps0 = con.prepareStatement("select * from emailaccounts where id = 3");
+		ResultSet rs0 = ps0.executeQuery();
+		if(rs0.next()){
+			userName = rs0.getString("email");
+			password = rs0.getString("password");
+		}
 		properties = new Properties();
 		properties.setProperty("mail.host", "bh-17.webhostbox.net");
 		properties.setProperty("mail.port", "143");

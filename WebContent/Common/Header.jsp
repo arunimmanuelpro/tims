@@ -211,7 +211,7 @@
 						</a>
 						<ul class="sub">
 							<li><a class="" href="<%=request.getContextPath()%>/Management/">Management Area</a></li>
-							
+							<li><a class="" href="<%=request.getContextPath()%>/Management/emailpassword.jsp">Email Password</a></li>
 						<!-- 	<li><a class=""	href="javascript:;" class="">
 								<i class=""></i><span>Performance</span><span class="arrow"></span></a>
 								<ul class="sub">

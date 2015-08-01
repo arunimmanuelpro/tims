@@ -4,6 +4,7 @@ import general.GetInfoAbout;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -34,13 +35,20 @@ public class ReadSulekha {
 	private Store store = null;
 	private Folder inbox = null;
 	boolean gotdata = false;
-	private String userName = "sulekha@eyeopentechnologies.com";// provide user name
-	private String password = "WinWin1940";// provide password
+	private String userName;// provide user name
+	private String password;// provide password
 
 	public ReadSulekha() {
 	}
 
 	public void readMails() throws IOException, Exception {
+		Connection con = DbConnection.getConnection();
+		PreparedStatement ps0 = con.prepareStatement("select * from emailaccounts where id = 1");
+		ResultSet rs0 = ps0.executeQuery();
+		if(rs0.next()){
+			userName = rs0.getString("email");
+			password = rs0.getString("password");
+		}
 		properties = new Properties();
 		properties.setProperty("mail.host", "bh-17.webhostbox.net");
 		properties.setProperty("mail.port", "143");
@@ -51,7 +59,7 @@ public class ReadSulekha {
 						return new PasswordAuthentication(userName, password);
 					}
 				});
-		Connection con = DbConnection.getConnection();
+		
 		try {
 			store = session.getStore("imaps");
 			store.connect();

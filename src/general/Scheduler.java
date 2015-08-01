@@ -60,14 +60,14 @@ public class Scheduler implements Runnable {
 		public void run() {
 			try {
 				
-			/*	  new ReadSulekha().readMails(); new
+				/*  new ReadSulekha().readMails(); new
 				  ReadSulekha2().readMails(); ReadJustDial jus = new
 				  ReadJustDial(); jus.readMails();
 				
 				 ReadYet5 yet = new ReadYet5(); yet.readMails();*/
 			
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 		}

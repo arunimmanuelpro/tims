@@ -3,6 +3,7 @@ package mailing;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,9 +38,9 @@ public class ReadJustDial {
 	private Store store = null;
 	private Folder inbox = null;
 	boolean gotdata = false;
-	private String userName = "justdial@eyeopentechnologies.com";// provide user
+	private String userName ;// provide user
 																	// name
-	private String password = "WinWin1940";// provide password
+	private String password;// provide password
 	private StringBuilder parsedcontent;
 
 	public ReadJustDial() {
@@ -47,8 +48,14 @@ public class ReadJustDial {
 	}
 
 	public void readMails() throws IOException, Exception {
+		Connection con = DbConnection.getConnection();
+		PreparedStatement ps0 = con.prepareStatement("select * from emailaccounts where id = 4");
+		ResultSet rs0 = ps0.executeQuery();
+		if(rs0.next()){
+			userName = rs0.getString("email");
+			password = rs0.getString("password");
+		}
 		properties = new Properties();
-		//properties.setProperty("mail.host", "imap.eyeopentechnologies.com");
 		properties.setProperty("mail.host", "bh-17.webhostbox.net");
 		properties.setProperty("mail.port", "143");	
 		properties.setProperty("mail.transport.protocol", "imaps");
@@ -72,7 +79,7 @@ public class ReadJustDial {
 						return new PasswordAuthentication(userName, password);
 					}
 				});
-	Connection con = DbConnection.getConnection();
+	
 		try {
 			store = session.getStore("imaps");
 			store.connect();
