@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="general.ActivityLog"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
@@ -34,45 +35,24 @@
 			String userid = request.getAttribute("userid").toString();
 
 			Connection con = DbConnection.getConnection();
-			Statement s = con.createStatement();
-			String sql = "UPDATE  `enquiry_data` SET  `callout` =  '"
-					+ cTime + "',`message` =  '" + message
-					+ "',`status` =  '" + status
-					+ "' WHERE `enquiry_id` = '" + id
-					+ "' AND `followon`='" + cDate
-					+ "' ORDER BY id DESC LIMIT 1";
-			int res = s.executeUpdate(sql);
-			sql = "UPDATE  `enquiry` SET  `status` =  'FOLLOWUP' WHERE `id` = '"
-					+ id + "';";
-			res = s.executeUpdate(sql);
-
-			if (status.equals("NOT-INTERESTED")
-					|| status.equals("WRONG-ENQUIRY")
-					|| status.equals("WRONG-NUMBER")
-					|| status.equals("NOT-IN-USE")) {
-				sql = "UPDATE  `enquiry` SET  `status` =  'NOT INTERESTED' WHERE `id` = '"
-						+ id + "'";
-				res = s.executeUpdate(sql);
-			} else if (!followon.isEmpty()) {
-				sql = "INSERT INTO `enquiry_data`(`enquiry_id`, `followon`) VALUES ('"
-						+ id + "','" + followon + "')";
-				res = s.executeUpdate(sql);
-			} else {
-				sql = "UPDATE  `enquiry` SET  `status` =  'COMPLETED' WHERE `id` = '"
-						+ id + "'";
-				res = s.executeUpdate(sql);
+			if(followon.isEmpty()||followon==null){
+				PreparedStatement ps = con.prepareStatement("insert into enquiry_data(enquiry_id,message,donebyempid)values(?,?,?)");
+				ps.setInt(1, Integer.parseInt(id));
+				
+				ps.setString(2, message);
+				int r   = (Integer)request.getAttribute("userid");
+				ps.setInt(3, r);
+				ps.executeUpdate();
+			}else{
+		PreparedStatement ps = con.prepareStatement("insert into enquiry_data(enquiry_id,followon,message,donebyempid)values(?,?,?,?)");
+		ps.setInt(1, Integer.parseInt(id));
+		ps.setString(2, followon);
+		ps.setString(3, message);
+		int r   = (Integer)request.getAttribute("userid");
+		ps.setInt(4, r);	
+		ps.executeUpdate();
 			}
-
-			if (res > 0) {
-				out.print("Call End Success");
-				String user = request.getAttribute("userid").toString();
-				ActivityLog.log("Call to Enquiry " + id
-						+ " was completed", "CALL", user);
-				response.sendRedirect("../Enquiry/details.jsp?id=" + id);
-			} else {
-				out.print("Error Ending Call. Please Try Again");
-				//Actual End
-			}
+			response.sendRedirect(request.getContextPath()+"/Enquiry/details.jsp?id="+id);
 		}
 	}
 %>

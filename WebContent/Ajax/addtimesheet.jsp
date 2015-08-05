@@ -48,35 +48,35 @@
 						.getParameter(i + "r1").equals("0"))) {
 		} else {
 			PreparedStatement ps = con
-						.prepareStatement("insert into timesheetmaster (empid,fromdate,todate,count,d1,d2,d3,d4,d5,d6,d7,cat,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+						.prepareStatement("insert into timesheetmaster (empid,fromdate,todate,d1,d2,d3,d4,d5,d6,d7,cat) values(?,?,?,?,?,?,?,?,?,?,?)");
 			
 			ps.setInt(1, (Integer) session.getAttribute("id"));
 			ps.setString(2, fromdate);
 			ps.setString(3, todate);
-			ps.setInt(4, count);
 			
-				ps.setString(5,
+			
+				ps.setString(4,
 						request.getParameter(i + "r1"));
 
-				ps.setString(6,
+				ps.setString(5,
 						request.getParameter(i + "r2"));
-				ps.setString(7,
+				ps.setString(6,
 						request.getParameter(i + "r3"));
-				ps.setString(8,
+				ps.setString(7,
 						request.getParameter(i + "r4"));
-				ps.setString(9,
+				ps.setString(8,
 						request.getParameter(i + "r5"));
 			
-				ps.setString(10,
+				ps.setString(9,
 						request.getParameter(i + "r6"));
 			
-				ps.setString(11,
+				ps.setString(10,
 						request.getParameter(i + "r7"));
 			
-				ps.setString(12,
+				ps.setString(11,
 						request.getParameter(i + "cat"));
 			
-			ps.setString(13, "Waiting");
+
 			
 			ps.executeUpdate();			
 
@@ -109,7 +109,7 @@
 	out.println("Data Stored Successfully");
 	}catch(Exception e){
 		e.printStackTrace();
-		out.println("There was Error in Processing your request, please try again later");
+		out.println("There was Error in Processing your request, please try again later "+e);
 	}
 	
 	con.close();

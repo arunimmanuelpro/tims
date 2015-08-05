@@ -25,10 +25,10 @@
 											data-validate="parsley">
 											<div class ="form-group">
 												
-												<div class = "col-lg-8" align ="center">
-												<input type= "radio"  name = "type" value ="Student" id = "type"/>  Student
-												<input type= "radio"  name = "type" value ="Professional" id = "type"/>  Professional
-												<input type= "radio"  name = "type" value ="Project" id = "type"/>  Project
+												<div class = "col-lg-8"   align ="center">
+												<input type= "radio"  style="margin-left: 15px;'" name = "type" value ="Student" id = "type"/>  Student
+												<input type= "radio" style="margin-left: 15px;" name = "type" value ="Professional" id = "type"/>  Professional
+												<input type= "radio" style="margin-left: 15px;"  name = "type" value ="Project" id = "type"/>  Project
 												</div>
 											</div>
 											<div class="form-group">
@@ -36,16 +36,7 @@
 												<div class="col-lg-8">
 													<select name="source" id="source" data-required="true" class = "form-control" >
 														<option value="">Please Choose</option>
-														<!-- <option value="db">DB</option>
-														<option value="walkin">Walkin</option>
-														<option value="walkin-emp-ref">Walkin Employee
-															Referal</option>
-														<option value="walkin-stu-ref">Walkin Student
-															Referal</option>
-														<option value="phone">Phone Enquiry</option>
-														<option value="sulekha-manual">Sulekha Manual</option>
-														<option value="justdial-manual">JustDial Manual</option>
-														<option value="yet5-manual">Yet5 Manual</option> -->
+														
 														<option value="Sulekha">Sulekha</option>
 														<option value="Sulekha-ref">Sulekha Ref</option>
 														<option value="Sulekha 2">Sulekha 2</option>

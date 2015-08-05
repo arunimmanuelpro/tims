@@ -158,7 +158,7 @@
 						</a>
 						<ul class="sub">							
 							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/">Mail Enquiry</a></li>
-							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/newenquiry.jsp">New Enquiry</a></li>
+						
 							
 							<li><a class="" href="<%=request.getContextPath()%>/Enquiry/?Follow">Follow Up</a></li>
 							<li><a class=""	href="<%=request.getContextPath()%>/Enquiry/?completed">Closed</a></li>		
@@ -178,7 +178,33 @@
 						</ul>
 					</li>					
 				<%	}  %>
-				
+					<li class="sub-menu">
+							<a href="javascript:;" class=""> 
+							<i class="fa fa-group"></i><span>Batch</span><span class="arrow"></span> </a>
+							<ul class="sub">
+							<% 			
+								if(jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4") || jobTitle.equals("5")){
+							%>	
+								<li><a class="" href="<%=request.getContextPath()%>/Batch/">New Batch</a></li>
+							<% 	}	%>
+							    <li><a href="<%=request.getContextPath()%>/comingsoon.jsp">Scheduled Batch</a></li>
+								<li><a href="<%=request.getContextPath()%>/comingsoon.jsp">Batch Info</a></li>							
+							</ul>
+						</li>
+						
+							<li class="sub-menu">
+							<a href="javascript:;" class=""> 
+							<i class="fa fa-legal"></i><span>Online Exam</span><span class="arrow"></span> </a>
+							<ul class="sub">
+							<% 	if(jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4")){	%>	
+									<li><a class="" href="<%=request.getContextPath()%>/Exam/comingsoon.jsp">Exam Centre</a></li>
+							<% 	}	%>
+								<li><a class="" href="<%=request.getContextPath()%>/Exam/comingsoon.jsp">Exam Schedule</a></li>
+								<li><a class="" href="<%=request.getContextPath()%>/Exam/comingsoon.jsp">Exam Reviews</a></li>
+								<li><a class="" href="<%=request.getContextPath()%>/Exam/comingsoon.jsp">Exam Report</a></li>							
+							</ul>
+						</li>
+						
 					<li class="sub-menu">
 						<a href="javascript:;"> 
 							<i class="fa fa-eye"></i><span>Employee</span>							
@@ -238,31 +264,8 @@
 					</li> 
 					
 					
-						<li class="sub-menu">
-							<a href="javascript:;" class=""> 
-							<i class="fa fa-group"></i><span>Batch</span><span class="arrow"></span> </a>
-							<ul class="sub">
-							<% 			
-								if(jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4") || jobTitle.equals("5")){
-							%>	
-								<li><a class="" href="<%=request.getContextPath()%>/Batch/">New Batch</a></li>
-							<% 	}	%>
-							    <li><a href="<%=request.getContextPath()%>/comingsoon.jsp">Scheduled Batch</a></li>
-								<li><a href="<%=request.getContextPath()%>/comingsoon.jsp">Batch Info</a></li>							
-							</ul>
-						</li>
-						<li class="sub-menu">
-							<a href="javascript:;" class=""> 
-							<i class="fa fa-legal"></i><span>Online Exam</span><span class="arrow"></span> </a>
-							<ul class="sub">
-							<% 	if(jobTitle.equals("2") || jobTitle.equals("3") || jobTitle.equals("4")){	%>	
-									<li><a class="" href="<%=request.getContextPath()%>/Exam/comingsoon.jsp">Exam Centre</a></li>
-							<% 	}	%>
-								<li><a class="" href="<%=request.getContextPath()%>/Exam/comingsoon.jsp">Exam Schedule</a></li>
-								<li><a class="" href="<%=request.getContextPath()%>/Exam/comingsoon.jsp">Exam Reviews</a></li>
-								<li><a class="" href="<%=request.getContextPath()%>/Exam/comingsoon.jsp">Exam Report</a></li>							
-							</ul>
-						</li>
+					
+					
 				
 				<%	if(jobTitle.equals("2") || jobTitle.equals("3")) {	%>
 				<li class="sub-menu">

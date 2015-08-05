@@ -77,6 +77,7 @@ Connection con3 = DbConnection.getConnection();
 //Email Duplication
 	
 	r.first();
+if(!(email==null||email.isEmpty())){
 	ps = con3.prepareStatement("select * from enquiry where email = ?and email!=''");
 	ps.setString(1, email);
 	r = ps.executeQuery();
@@ -91,7 +92,7 @@ Connection con3 = DbConnection.getConnection();
 	if(emailduplicate.size()>0){
 		duplicate=true;
 	}
-	
+}
 	
 	
 	
@@ -365,56 +366,14 @@ Connection con3 = DbConnection.getConnection();
 						<section class="panel">
 							<header class="panel-heading"> Today </header>
 							<div>
-								<%
-								
-														Statement st;
-														String sqlq;
-														ResultSet rss;
-														st = con3.createStatement();
-
-														SimpleDateFormat ddmm = new SimpleDateFormat("yyyy-MM-dd");
-														Date today = new Date();
-														String todayd = ddmm.format(today);
-
-														String ses_user_id = request.getAttribute("userid").toString();
-														
-														sqlq = "SELECT * FROM enquiry_data where `followon` = '" + todayd
-																+ "' AND `enquiry_id` = '" + id
-																+ "' ORDER BY id DESC LIMIT 1";
-														
-														rss = st.executeQuery(sqlq);
-														if (rss.next()) {
-															String callin = rss.getString("callin");
-															String callout = rss.getString("callout");
-															String emp_id = rss.getString("donebyempid");
-															
-															if (callout == null || callout.isEmpty()||callin.equals("00:00:00")) {
-																
-																if (status.equalsIgnoreCase("NEW")
-																		|| status.equalsIgnoreCase("FOLLOWUP")) {
-																	
-								%>
-								<a
+							<%-- <a
 									href="<%=request.getContextPath()%>/Ajax/enquirycall.jsp?id=<%=id%>"
-									class="btn btn-success btn-circle"><i class="icon-phone"></i>Call</a>
-								<%
-									} else if (status.equalsIgnoreCase("ONCALL") && emp_id.equals(ses_user_id)) {
-															//if call on
-								%>
-								<h2><%=mobile%></h2>
+									class="btn btn-success btn-circle">
+									<i class="icon-phone"></i>Call</a> --%>
+										<h2><%=mobile%></h2>
 								<br> <a href="#" class="btn btn-danger btn-circle"
-									id="endcall"><i class="icon-stop"></i>End</a>
-								<%
-									} else {
-																	out.println("<h2>Call in Progress (or) Enquiry Status Invalid</h2>");
-																}
-															} else {
-																out.println("<h2>Call for today is Complete</h2>");
-															}
-														}else{
-								%>
+									id="endcall"><i class="icon-stop"></i>Follow</a>
 								
-								<%} %>
 							</div>
 							<script type="text/javascript">
 								// we will add our javascript code here           
@@ -463,7 +422,7 @@ Connection con3 = DbConnection.getConnection();
 							<header class="panel-heading"> Leave a Log </header>
 							<div>
 								<form class="form-horizontal" id="statusform" name="statusform"
-									method="post"
+									method="get"
 									action="<%=request.getContextPath()%>/Ajax/enquirycallend.jsp">
 									<div class="form-group">
 										<label class="col-lg-3 control-label">Status Info</label>

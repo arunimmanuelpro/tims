@@ -45,7 +45,11 @@
 		jo.put("source", rs.getString("source"));
 
 		jo.put("name", rs.getString("name"));
+		if(rs.getString("email")==null||rs.getString("email").isEmpty()){
+			jo.put("email", "");
+		}else{
 		jo.put("email", rs.getString("email"));
+		}
 		jo.put("course", rs.getString("courseinterested"));
 		jo.put("status", rs.getString("status"));
 		jo.put("followon", followon);
